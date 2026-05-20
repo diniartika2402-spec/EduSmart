@@ -615,23 +615,45 @@ RESPONSIVE
 }
 
 /* ====================================
-RESPONSIVE UNIVERSAL
+RESPONSIVE MATERI
 ==================================== */
 
 /* TABLET */
 
 @media(max-width:992px){
 
-.hero h1{
-font-size:36px;
+.main{
+padding:20px;
 }
 
-.grid,
-.status-grid,
-.info-grid,
-.quiz-section,
-.cyber-layout{
-grid-template-columns:1fr !important;
+.hero-materi{
+padding:38px;
+border-radius:28px;
+}
+
+.hero-materi h1{
+font-size:38px;
+line-height:1.4;
+}
+
+.materi-grid{
+grid-template-columns:repeat(2,1fr);
+gap:18px;
+}
+
+.learning-path::before{
+left:28px;
+}
+
+.path-number{
+width:60px;
+height:60px;
+font-size:22px;
+border-radius:20px;
+}
+
+.path-header h2{
+font-size:26px;
 }
 
 }
@@ -647,118 +669,300 @@ overflow-x:hidden;
 /* APP */
 
 .app{
-flex-direction:column;
+display:block;
 }
 
 /* SIDEBAR */
 
 .sidebar{
-width:100%;
-height:auto;
+position:fixed;
+left:-100%;
+top:0;
+
+width:260px;
+height:100vh;
+
+z-index:9999;
+
+transition:.3s;
 border-radius:0;
+}
+
+.sidebar.active{
+left:0;
 }
 
 /* MAIN */
 
 .main{
-padding:18px;
-}
-
-/* TOPBAR */
-
-.topbar{
-flex-direction:column;
-align-items:flex-start;
-gap:15px;
+width:100%;
+padding:16px;
 }
 
 /* HERO */
 
-.hero{
-padding:25px;
+.hero-materi{
+padding:28px 22px;
 border-radius:24px;
 }
 
-.hero h1{
-font-size:28px;
+.hero-materi h1{
+font-size:30px;
 line-height:1.4;
 }
 
-.hero p{
+.hero-materi p{
 font-size:14px;
 line-height:1.8;
 }
 
-/* GRID */
-
-.grid,
-.status-grid,
-.info-grid,
-.quiz-section,
-.cyber-layout,
-.stats-modern{
-grid-template-columns:1fr !important;
+.hero-actions{
+flex-direction:row;
+flex-wrap:wrap;
+gap:12px;
 }
 
-/* CARD */
+.hero-actions .btn{
+width:auto;
+}
 
-.card,
-.panel,
-.quiz-card,
-.status-card,
-.info-card,
-.modern-box{
+/* PROGRESS */
+
+.global-progress{
 padding:22px;
 border-radius:24px;
 }
 
-/* BUTTON */
-
-.btn,
-.start-btn{
-width:100%;
+.progress-top{
+align-items:flex-start;
 }
 
-/* QUIZ */
-
-.question{
-font-size:22px;
+.progress-top h2{
+font-size:24px;
 }
 
-.final-score{
-font-size:58px;
+.progress-percent{
+font-size:34px;
 }
 
-/* NETWORK */
+/* LEARNING PATH */
 
-.network-map{
-overflow:auto;
+.learning-path{
+gap:24px;
 }
 
-/* LOGIN */
+.learning-path::before{
+display:none;
+}
 
-.login-card{
-width:100%;
-max-width:420px;
-padding:30px 24px;
+.path-item{
+display:block;
+}
+
+.path-number{
+width:56px;
+height:56px;
+font-size:20px;
+border-radius:18px;
+margin-bottom:14px;
+}
+
+.path-header h2{
+font-size:24px;
+}
+
+.path-header p{
+font-size:14px;
+}
+
+/* GRID */
+
+.materi-grid{
+grid-template-columns:repeat(2,1fr);
+gap:14px;
+}
+
+/* CARD */
+
+.materi-card{
+padding:18px;
+border-radius:22px;
+}
+
+.materi-icon{
+width:56px;
+height:56px;
+font-size:24px;
+border-radius:18px;
+}
+
+.materi-card h3{
+font-size:18px;
+line-height:1.4;
+}
+
+.materi-card p{
+font-size:12px;
+line-height:1.6;
+margin-top:10px;
+}
+
+.materi-info{
+gap:8px;
+}
+
+.materi-badge{
+font-size:11px;
+padding:6px 10px;
+}
+
+.materi-list{
+margin-top:16px;
+gap:10px;
+}
+
+.materi-item{
+padding:10px 12px;
+font-size:11px;
+border-radius:12px;
+}
+
+.status{
+font-size:10px;
+padding:5px 8px;
+}
+
+/* VIDEO */
+
+.video-box{
+margin-top:16px;
+border-radius:14px;
+overflow:hidden;
+}
+
+.video-box iframe{
+height:140px;
+}
+
+/* TIPS */
+
+.tips-box{
+padding:26px;
+border-radius:24px;
+}
+
+.tips-box h2{
+font-size:24px;
+line-height:1.4;
+}
+
+.tips-box p,
+.tips-box li{
+font-size:14px;
+line-height:1.8;
+}
+
+/* MOBILE TOPBAR */
+
+.mobile-topbar{
+display:flex;
+justify-content:space-between;
+align-items:center;
+
+position:sticky;
+top:0;
+
+padding:16px 18px;
+
+background:white;
+
+border-radius:18px;
+
+margin-bottom:18px;
+
+z-index:999;
+
+box-shadow:
+0 10px 25px rgba(0,0,0,.08);
+}
+
+.mobile-logo{
+font-weight:800;
+font-size:18px;
+}
+
+.mobile-menu{
+font-size:26px;
+cursor:pointer;
 }
 
 }
 
 /* SMALL MOBILE */
 
-@media(max-width:480px){
+@media(max-width:560px){
 
-.hero h1{
-font-size:24px;
+.materi-grid{
+grid-template-columns:repeat(2,1fr);
+gap:12px;
 }
 
-.question{
+.materi-card{
+padding:15px;
+}
+
+.materi-card h3{
+font-size:16px;
+}
+
+.materi-card p{
+font-size:11px;
+}
+
+.video-box iframe{
+height:110px;
+}
+
+.hero-materi h1{
+font-size:26px;
+}
+
+.path-header h2{
 font-size:20px;
 }
 
-.status-value{
-font-size:28px;
+}
+
+/* EXTRA SMALL */
+
+@media(max-width:420px){
+
+.materi-grid{
+grid-template-columns:1fr 1fr;
+gap:10px;
+}
+
+.materi-card{
+padding:14px;
+border-radius:18px;
+}
+
+.materi-icon{
+width:48px;
+height:48px;
+font-size:20px;
+}
+
+.materi-card h3{
+font-size:14px;
+}
+
+.materi-item{
+font-size:10px;
+}
+
+.video-box iframe{
+height:95px;
 }
 
 }
@@ -1389,6 +1593,17 @@ totalProgress + "%";
 
 </script>
 
+<script>
+
+function toggleSidebar(){
+
+document
+.querySelector(".sidebar")
+.classList.toggle("active");
+
+}
+
+</script>
 </body>
 </html>
 </script>

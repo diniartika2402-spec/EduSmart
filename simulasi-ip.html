@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Simulasi IP Address - EduSmart</title>
+
+<link rel="stylesheet" href="css/style.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+
+.sim-page{
+  display:flex;
+  flex-direction:column;
+  gap:24px;
+}
+
+/* HERO */
+
+.hero{
+  background:
+  linear-gradient(
+    135deg,
+    #2563eb,
+    #60a5fa
+  );
+
+  color:white;
+
+  padding:35px;
+
+  border-radius:30px;
+}
+
+.hero h1{
+  font-size:38px;
+}
+
+.hero p{
+  margin-top:10px;
+  opacity:.9;
+  line-height:1.8;
+}
+
+/* CARD */
+
+.card{
+  background:white;
+
+  border-radius:28px;
+
+  padding:28px;
+
+  box-shadow:0 10px 30px rgba(0,0,0,.06);
+}
+
+/* SOAL */
+
+.question-box h2{
+  font-size:30px;
+}
+
+.question-box p{
+  margin-top:10px;
+  line-height:1.8;
+  color:#64748b;
+}
+
+/* TOPOLOGY */
+
+.network{
+  margin-top:28px;
+
+  background:#f8fafc;
+
+  border:2px dashed #93c5fd;
+
+  border-radius:24px;
+
+  padding:30px;
+
+  position:relative;
+
+  min-height:280px;
+}
+
+.device{
+  position:absolute;
+
+  background:white;
+
+  border-radius:20px;
+
+  padding:18px;
+
+  width:140px;
+
+  text-align:center;
+
+  box-shadow:0 10px 25px rgba(0,0,0,.08);
+
+  font-weight:700;
+}
+
+.pc1{
+  left:40px;
+  top:80px;
+}
+
+.pc2{
+  right:40px;
+  top:80px;
+}
+
+.router{
+  left:50%;
+  top:70px;
+  transform:translateX(-50%);
+}
+
+.line{
+  position:absolute;
+  height:4px;
+  background:#2563eb;
+  top:125px;
+}
+
+.line1{
+  left:180px;
+  width:220px;
+}
+
+.line2{
+  right:180px;
+  width:220px;
+}
+
+/* INPUT */
+
+.input-grid{
+  margin-top:28px;
+
+  display:grid;
+
+  grid-template-columns:
+  repeat(auto-fit,minmax(240px,1fr));
+
+  gap:18px;
+}
+
+.input-box{
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+}
+
+.input-box label{
+  font-weight:700;
+}
+
+.input-box input{
+  padding:14px;
+
+  border-radius:14px;
+
+  border:2px solid #dbeafe;
+
+  outline:none;
+
+  font-size:15px;
+}
+
+.input-box input:focus{
+  border-color:#2563eb;
+}
+
+/* BUTTON */
+
+.actions{
+  margin-top:30px;
+
+  display:flex;
+  gap:14px;
+  flex-wrap:wrap;
+}
+
+.btn{
+  border:none;
+
+  padding:15px 24px;
+
+  border-radius:16px;
+
+  background:#2563eb;
+
+  color:white;
+
+  font-weight:700;
+
+  cursor:pointer;
+
+  transition:.3s;
+}
+
+.btn:hover{
+  transform:translateY(-3px);
+}
+
+.btn.secondary{
+  background:#0f172a;
+}
+
+/* RESULT */
+
+.result{
+  margin-top:24px;
+
+  padding:22px;
+
+  border-radius:20px;
+
+  font-weight:700;
+
+  display:none;
+}
+
+.success{
+  background:#dcfce7;
+  color:#166534;
+}
+
+.error{
+  background:#fee2e2;
+  color:#991b1b;
+}
+
+/* SCORE */
+
+.score-box{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:20px;
+}
+
+.score{
+  font-size:42px;
+  font-weight:800;
+  color:#2563eb;
+}
+
+.badge{
+  padding:10px 16px;
+  border-radius:999px;
+  background:#dbeafe;
+  color:#2563eb;
+  font-weight:700;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:900px){
+
+  .network{
+    min-height:420px;
+  }
+
+  .router{
+    top:40px;
+  }
+
+  .pc1{
+    left:50%;
+    top:180px;
+    transform:translateX(-50%);
+  }
+
+  .pc2{
+    right:auto;
+    left:50%;
+    top:320px;
+    transform:translateX(-50%);
+  }
+
+  .line1,
+  .line2{
+    display:none;
+  }
+
+}
+
+/* ====================================
+RESPONSIVE UNIVERSAL
+==================================== */
+
+/* TABLET */
+
+@media(max-width:992px){
+
+.hero h1{
+font-size:36px;
+}
+
+.grid,
+.status-grid,
+.info-grid,
+.quiz-section,
+.cyber-layout{
+grid-template-columns:1fr !important;
+}
+
+}
+
+/* MOBILE */
+
+@media(max-width:768px){
+
+body{
+overflow-x:hidden;
+}
+
+/* APP */
+
+.app{
+flex-direction:column;
+}
+
+/* SIDEBAR */
+
+.sidebar{
+width:100%;
+height:auto;
+border-radius:0;
+}
+
+/* MAIN */
+
+.main{
+padding:18px;
+}
+
+/* TOPBAR */
+
+.topbar{
+flex-direction:column;
+align-items:flex-start;
+gap:15px;
+}
+
+/* HERO */
+
+.hero{
+padding:25px;
+border-radius:24px;
+}
+
+.hero h1{
+font-size:28px;
+line-height:1.4;
+}
+
+.hero p{
+font-size:14px;
+line-height:1.8;
+}
+
+/* GRID */
+
+.grid,
+.status-grid,
+.info-grid,
+.quiz-section,
+.cyber-layout,
+.stats-modern{
+grid-template-columns:1fr !important;
+}
+
+/* CARD */
+
+.card,
+.panel,
+.quiz-card,
+.status-card,
+.info-card,
+.modern-box{
+padding:22px;
+border-radius:24px;
+}
+
+/* BUTTON */
+
+.btn,
+.start-btn{
+width:100%;
+}
+
+/* QUIZ */
+
+.question{
+font-size:22px;
+}
+
+.final-score{
+font-size:58px;
+}
+
+/* NETWORK */
+
+.network-map{
+overflow:auto;
+}
+
+/* LOGIN */
+
+.login-card{
+width:100%;
+max-width:420px;
+padding:30px 24px;
+}
+
+}
+
+/* SMALL MOBILE */
+
+@media(max-width:480px){
+
+.hero h1{
+font-size:24px;
+}
+
+.question{
+font-size:20px;
+}
+
+.status-value{
+font-size:28px;
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="app">
+
+<!-- SIDEBAR -->
+
+<aside class="sidebar">
+
+<div>
+
+<div class="logo-box">
+
+<div class="logo">
+🌐
+</div>
+
+<div>
+<h2>EduSmart</h2>
+<p>Network Learning</p>
+</div>
+
+</div>
+
+<div class="nav-menu">
+
+<a href="dashboard.html" class="nav-link">
+🏠 Dashboard
+</a>
+
+<a href="materi.html" class="nav-link">
+📚 Materi
+</a>
+
+<a href="simulasi.html" class="nav-link active">
+🧩 Simulasi
+</a>
+
+<a href="kuis.html" class="nav-link">
+🎮 Kuis
+</a>
+
+</div>
+
+</div>
+
+</aside>
+
+<!-- MAIN -->
+
+<main class="main sim-page">
+
+<!-- HERO -->
+
+<div class="hero">
+
+<h1>💻 Simulasi IP Address</h1>
+
+<p>
+Kerjakan berbagai studi kasus networking.
+Tiap soal memiliki tantangan berbeda:
+beda subnet, beda perangkat, beda jumlah host, dan beda konfigurasi.
+</p>
+
+</div>
+
+<!-- SCORE -->
+
+<div class="card score-box">
+
+<div>
+
+<h2>📈 Progress Simulasi</h2>
+
+<p id="progressText">
+Soal 1 dari 5
+</p>
+
+</div>
+
+<div>
+
+<div class="score" id="score">
+0
+</div>
+
+<div class="badge">
+Score
+</div>
+
+</div>
+
+</div>
+
+<!-- QUESTION -->
+
+<div class="card question-box">
+
+<h2 id="questionTitle">
+Loading...
+</h2>
+
+<p id="questionDesc">
+Loading...
+</p>
+
+<!-- NETWORK -->
+
+<div class="network">
+
+<div class="device pc1" id="leftDevice">
+💻 PC 1
+</div>
+
+<div class="line line1"></div>
+
+<div class="device router">
+📡 Router
+</div>
+
+<div class="line line2"></div>
+
+<div class="device pc2" id="rightDevice">
+💻 PC 2
+</div>
+
+</div>
+
+<!-- INPUT -->
+
+<div class="input-grid">
+
+<div class="input-box">
+
+<label>
+IP Device 1
+</label>
+
+<input type="text" id="ip1">
+
+</div>
+
+<div class="input-box">
+
+<label>
+Subnet Mask
+</label>
+
+<input type="text" id="subnet">
+
+</div>
+
+<div class="input-box">
+
+<label>
+Gateway
+</label>
+
+<input type="text" id="gateway">
+
+</div>
+
+<div class="input-box">
+
+<label>
+IP Device 2
+</label>
+
+<input type="text" id="ip2">
+
+</div>
+
+</div>
+
+<!-- BUTTON -->
+
+<div class="actions">
+
+<button class="btn" onclick="checkAnswer()">
+✔ Tes Koneksi
+</button>
+
+<button class="btn secondary" onclick="nextQuestion()">
+➡ Soal Berikutnya
+</button>
+
+</div>
+
+<!-- RESULT -->
+
+<div class="result" id="resultBox">
+
+</div>
+
+</div>
+
+</main>
+
+</div>
+
+<script>
+
+const questions = [
+
+{
+title:"🖥️ Kantor Kecil",
+desc:"2 PC harus berada dalam jaringan yang sama menggunakan subnet /24.",
+left:"💻 PC Staff",
+right:"🖥️ PC Admin",
+ip1:"192.168.1.10",
+subnet:"255.255.255.0",
+gateway:"192.168.1.1",
+ip2:"192.168.1.20"
+},
+
+{
+title:"🏫 Lab Sekolah",
+desc:"Konfigurasi jaringan lab komputer dengan subnet /24.",
+left:"💻 PC Guru",
+right:"💻 PC Siswa",
+ip1:"10.10.10.2",
+subnet:"255.255.255.0",
+gateway:"10.10.10.1",
+ip2:"10.10.10.5"
+},
+
+{
+title:"🏢 Gedung Perusahaan",
+desc:"Gunakan subnet /16 agar jaringan dapat menampung banyak host.",
+left:"🖥️ Divisi A",
+right:"🖥️ Divisi B",
+ip1:"172.16.5.10",
+subnet:"255.255.0.0",
+gateway:"172.16.0.1",
+ip2:"172.16.8.20"
+},
+
+{
+title:"☕ Cafe WiFi",
+desc:"Konfigurasikan perangkat kasir dan printer dalam jaringan /24.",
+left:"💳 Kasir",
+right:"🖨️ Printer",
+ip1:"192.168.50.2",
+subnet:"255.255.255.0",
+gateway:"192.168.50.1",
+ip2:"192.168.50.10"
+},
+
+{
+title:"🏥 Rumah Sakit",
+desc:"Hubungkan server data pasien dengan komputer administrasi.",
+left:"🗄️ Server",
+right:"💻 Admin",
+ip1:"172.20.1.2",
+subnet:"255.255.255.0",
+gateway:"172.20.1.1",
+ip2:"172.20.1.15"
+}
+
+];
+
+let current = 0;
+let score = 0;
+
+function loadQuestion(){
+
+  const q = questions[current];
+
+  document.getElementById("questionTitle").innerHTML =
+  q.title;
+
+  document.getElementById("questionDesc").innerHTML =
+  q.desc;
+
+  document.getElementById("leftDevice").innerHTML =
+  q.left;
+
+  document.getElementById("rightDevice").innerHTML =
+  q.right;
+
+  document.getElementById("progressText").innerHTML =
+  "Soal " + (current + 1) + " dari " + questions.length;
+
+  document.getElementById("ip1").value = "";
+  document.getElementById("subnet").value = "";
+  document.getElementById("gateway").value = "";
+  document.getElementById("ip2").value = "";
+
+  document.getElementById("resultBox").style.display =
+  "none";
+
+}
+
+function checkAnswer(){
+
+  const q = questions[current];
+
+  const ip1 =
+  document.getElementById("ip1").value.trim();
+
+  const subnet =
+  document.getElementById("subnet").value.trim();
+
+  const gateway =
+  document.getElementById("gateway").value.trim();
+
+  const ip2 =
+  document.getElementById("ip2").value.trim();
+
+  const result =
+  document.getElementById("resultBox");
+
+  if(
+    ip1 === q.ip1 &&
+    subnet === q.subnet &&
+    gateway === q.gateway &&
+    ip2 === q.ip2
+  ){
+
+    result.style.display = "block";
+
+    result.className =
+    "result success";
+
+    result.innerHTML =
+    "🎉 BERHASIL! Semua konfigurasi IP benar dan perangkat dapat saling terhubung.";
+
+    score += 20;
+
+    document.getElementById("score").innerHTML =
+    score;
+
+  } else {
+
+    result.style.display = "block";
+
+    result.className =
+    "result error";
+
+    result.innerHTML =
+    "❌ Konfigurasi masih salah. Periksa kembali IP, subnet mask, dan gateway.";
+
+  }
+
+}
+
+function nextQuestion(){
+
+  current++;
+
+  if(current >= questions.length){
+
+    alert(
+      "🎉 Semua simulasi selesai! Score akhir kamu: " + score
+    );
+
+    current = 0;
+    score = 0;
+
+    document.getElementById("score").innerHTML =
+    score;
+
+  }
+
+  loadQuestion();
+
+}
+
+loadQuestion();
+
+</script>
+
+</body>
+</html>

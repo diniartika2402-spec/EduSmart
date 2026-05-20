@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Simulasi - EduSmart</title>
+
+<link rel="stylesheet" href="css/style.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+
+/* =========================
+PAGE
+========================= */
+
+.simulasi-page{
+  display:flex;
+  flex-direction:column;
+  gap:32px;
+}
+
+/* =========================
+HERO
+========================= */
+
+.hero-sim{
+  background:
+  linear-gradient(
+    135deg,
+    #0f172a,
+    #2563eb
+  );
+
+  color:white;
+
+  padding:50px;
+
+  border-radius:36px;
+
+  position:relative;
+  overflow:hidden;
+}
+
+.hero-sim::before{
+  content:"";
+
+  position:absolute;
+
+  width:320px;
+  height:320px;
+
+  border-radius:50%;
+
+  background:rgba(255,255,255,.08);
+
+  top:-100px;
+  right:-100px;
+}
+
+.hero-sim h1{
+  font-size:48px;
+  position:relative;
+  z-index:2;
+}
+
+.hero-sim p{
+  margin-top:18px;
+
+  max-width:720px;
+
+  line-height:1.9;
+
+  opacity:.92;
+
+  position:relative;
+  z-index:2;
+}
+
+/* =========================
+SECTION
+========================= */
+
+.section-title h2{
+  font-size:34px;
+  font-weight:800;
+}
+
+.section-title p{
+  margin-top:10px;
+  color:var(--text);
+  line-height:1.8;
+}
+
+/* =========================
+GRID
+========================= */
+
+.sim-grid{
+  display:grid;
+
+  grid-template-columns:
+  repeat(auto-fit,minmax(300px,1fr));
+
+  gap:24px;
+}
+
+/* =========================
+CARD
+========================= */
+
+.sim-card{
+  background:white;
+
+  border-radius:32px;
+
+  padding:28px;
+
+  box-shadow:var(--shadow);
+
+  transition:.3s;
+
+  position:relative;
+
+  overflow:hidden;
+
+  text-decoration:none;
+
+  color:inherit;
+}
+
+.sim-card:hover{
+  transform:translateY(-8px);
+}
+
+.sim-card::before{
+  content:"";
+
+  position:absolute;
+
+  width:120px;
+  height:120px;
+
+  border-radius:50%;
+
+  background:#eff6ff;
+
+  top:-40px;
+  right:-40px;
+}
+
+.sim-icon{
+  width:78px;
+  height:78px;
+
+  border-radius:24px;
+
+  display:flex;
+  justify-content:center;
+  align-items:center;
+
+  font-size:34px;
+
+  position:relative;
+  z-index:2;
+}
+
+.blue{
+  background:#dbeafe;
+}
+
+.yellow{
+  background:#fef3c7;
+}
+
+.green{
+  background:#dcfce7;
+}
+
+.red{
+  background:#fee2e2;
+}
+
+.sim-card h3{
+  margin-top:22px;
+
+  font-size:28px;
+
+  position:relative;
+  z-index:2;
+}
+
+.sim-card p{
+  margin-top:14px;
+
+  color:var(--text);
+
+  line-height:1.8;
+
+  position:relative;
+  z-index:2;
+}
+
+.sim-info{
+  margin-top:22px;
+
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+}
+
+.badge{
+  padding:8px 14px;
+
+  border-radius:999px;
+
+  background:#eff6ff;
+  color:#2563eb;
+
+  font-size:13px;
+  font-weight:700;
+}
+
+.sim-list{
+  margin-top:24px;
+
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+}
+
+.sim-item{
+  background:#f8fafc;
+
+  padding:14px 16px;
+
+  border-radius:16px;
+
+  font-size:14px;
+  font-weight:600;
+}
+
+/* =========================
+STATUS
+========================= */
+
+.status{
+  display:inline-flex;
+
+  margin-top:20px;
+
+  padding:8px 14px;
+
+  border-radius:999px;
+
+  font-size:13px;
+  font-weight:800;
+}
+
+.open{
+  background:#dbeafe;
+  color:#2563eb;
+}
+
+.locked{
+  background:#fee2e2;
+  color:#dc2626;
+}
+
+.locked-card{
+  pointer-events:none;
+  opacity:.5;
+  filter:grayscale(1);
+}
+
+/* =========================
+RESPONSIVE
+========================= */
+
+@media(max-width:768px){
+
+  .hero-sim{
+    padding:35px;
+  }
+
+  .hero-sim h1{
+    font-size:36px;
+  }
+
+}
+
+/* ====================================
+RESPONSIVE UNIVERSAL
+==================================== */
+
+/* TABLET */
+
+@media(max-width:992px){
+
+.hero h1{
+font-size:36px;
+}
+
+.grid,
+.status-grid,
+.info-grid,
+.quiz-section,
+.cyber-layout{
+grid-template-columns:1fr !important;
+}
+
+}
+
+/* MOBILE */
+
+@media(max-width:768px){
+
+body{
+overflow-x:hidden;
+}
+
+/* APP */
+
+.app{
+flex-direction:column;
+}
+
+/* SIDEBAR */
+
+.sidebar{
+width:100%;
+height:auto;
+border-radius:0;
+}
+
+/* MAIN */
+
+.main{
+padding:18px;
+}
+
+/* TOPBAR */
+
+.topbar{
+flex-direction:column;
+align-items:flex-start;
+gap:15px;
+}
+
+/* HERO */
+
+.hero{
+padding:25px;
+border-radius:24px;
+}
+
+.hero h1{
+font-size:28px;
+line-height:1.4;
+}
+
+.hero p{
+font-size:14px;
+line-height:1.8;
+}
+
+/* GRID */
+
+.grid,
+.status-grid,
+.info-grid,
+.quiz-section,
+.cyber-layout,
+.stats-modern{
+grid-template-columns:1fr !important;
+}
+
+/* CARD */
+
+.card,
+.panel,
+.quiz-card,
+.status-card,
+.info-card,
+.modern-box{
+padding:22px;
+border-radius:24px;
+}
+
+/* BUTTON */
+
+.btn,
+.start-btn{
+width:100%;
+}
+
+/* QUIZ */
+
+.question{
+font-size:22px;
+}
+
+.final-score{
+font-size:58px;
+}
+
+/* NETWORK */
+
+.network-map{
+overflow:auto;
+}
+
+/* LOGIN */
+
+.login-card{
+width:100%;
+max-width:420px;
+padding:30px 24px;
+}
+
+}
+
+/* SMALL MOBILE */
+
+@media(max-width:480px){
+
+.hero h1{
+font-size:24px;
+}
+
+.question{
+font-size:20px;
+}
+
+.status-value{
+font-size:28px;
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="app">
+
+<!-- SIDEBAR -->
+
+<aside class="sidebar">
+
+<div>
+
+<div class="logo-box">
+
+<div class="logo">
+🌐
+</div>
+
+<div>
+<h2>EduSmart</h2>
+<p>Network Learning</p>
+</div>
+
+</div>
+
+<div class="nav-menu">
+
+<a href="dashboard.html" class="nav-link">
+🏠 Dashboard
+</a>
+
+<a href="materi.html" class="nav-link">
+📚 Materi
+</a>
+
+<a href="simulasi.html" class="nav-link active">
+🧩 Simulasi
+</a>
+
+<a href="kuis.html" class="nav-link">
+🎮 Kuis
+</a>
+
+</div>
+
+</div>
+
+</aside>
+
+<!-- MAIN -->
+
+<main class="main simulasi-page">
+
+<!-- HERO -->
+
+<div class="hero-sim">
+
+<h1>🧩 Simulasi Networking</h1>
+
+<p>
+Latihan praktik networking interaktif mulai dari
+topologi jaringan,
+perangkat networking,
+IP Address,
+hingga cyber security.
+</p>
+
+</div>
+
+<!-- TITLE -->
+
+<div class="section-title">
+
+<h2>🚀 Pilih Simulasi</h2>
+
+<p>
+Setiap simulasi memiliki objective dan tantangan berbeda.
+Selesaikan simulasi untuk meningkatkan pemahaman networking kamu.
+</p>
+
+</div>
+
+<!-- GRID -->
+
+<div class="sim-grid">
+
+<!-- TOPOLOGI -->
+
+<a href="simulasi-topologi.html"
+class="sim-card">
+
+<div class="sim-icon blue">
+🌐
+</div>
+
+<h3>Simulasi Topologi</h3>
+
+<p>
+Bangun topologi jaringan dan hubungkan perangkat sesuai tugas.
+</p>
+
+<div class="sim-info">
+
+<div class="badge">
+Beginner
+</div>
+
+<div class="badge">
+Interactive
+</div>
+
+</div>
+
+<div class="sim-list">
+
+<div class="sim-item">
+✔ Hubungkan PC ke Switch
+</div>
+
+<div class="sim-item">
+✔ Buat topologi star
+</div>
+
+<div class="sim-item">
+✔ Cek koneksi jaringan
+</div>
+
+</div>
+
+<div class="status open">
+OPEN
+</div>
+
+</a>
+
+<!-- PERANGKAT -->
+
+<a href="simulasi-perangkat.html"
+class="sim-card locked-card"
+id="perangkat-sim">
+
+<div class="sim-icon yellow">
+📡
+</div>
+
+<h3>Simulasi Perangkat</h3>
+
+<p>
+Pelajari hubungan router,
+switch,
+access point,
+dan perangkat lainnya.
+</p>
+
+<div class="sim-info">
+
+<div class="badge">
+Intermediate
+</div>
+
+<div class="badge">
+Devices
+</div>
+
+</div>
+
+<div class="sim-list">
+
+<div class="sim-item">
+✔ Hubungkan Router
+</div>
+
+<div class="sim-item">
+✔ Gunakan Switch
+</div>
+
+<div class="sim-item">
+✔ Atur koneksi perangkat
+</div>
+
+</div>
+
+<div class="status locked">
+LOCKED
+</div>
+
+</a>
+
+<!-- IP -->
+
+<a href="simulasi-ip.html"
+class="sim-card locked-card"
+id="ip-sim">
+
+<div class="sim-icon green">
+💻
+</div>
+
+<h3>Simulasi IP Address</h3>
+
+<p>
+Atur IP Address dan lakukan test ping antar perangkat.
+</p>
+
+<div class="sim-info">
+
+<div class="badge">
+Intermediate
+</div>
+
+<div class="badge">
+Configuration
+</div>
+
+</div>
+
+<div class="sim-list">
+
+<div class="sim-item">
+✔ Atur IPv4
+</div>
+
+<div class="sim-item">
+✔ Test Ping
+</div>
+
+<div class="sim-item">
+✔ Analisis subnet
+</div>
+
+</div>
+
+<div class="status locked">
+LOCKED
+</div>
+
+</a>
+
+<!-- SECURITY -->
+
+<a href="simulasi-keamanan.html"
+class="sim-card locked-card"
+id="security-sim">
+
+<div class="sim-icon red">
+🔐
+</div>
+
+<h3>Simulasi Security</h3>
+
+<p>
+Bangun sistem keamanan jaringan menggunakan firewall dan proteksi data.
+</p>
+
+<div class="sim-info">
+
+<div class="badge">
+Advanced
+</div>
+
+<div class="badge">
+Cyber Security
+</div>
+
+</div>
+
+<div class="sim-list">
+
+<div class="sim-item">
+✔ Pasang Firewall
+</div>
+
+<div class="sim-item">
+✔ Lindungi jaringan
+</div>
+
+<div class="sim-item">
+✔ Amankan koneksi
+</div>
+
+</div>
+
+<div class="status locked">
+LOCKED
+</div>
+
+</a>
+
+</div>
+
+</main>
+
+</div>
+
+<script>
+
+/* =========================
+AMBIL PROGRESS
+========================= */
+
+const topologiDone =
+localStorage.getItem("topologiDone");
+
+const perangkatDone =
+localStorage.getItem("perangkatDone");
+
+const ipDone =
+localStorage.getItem("ipDone");
+
+/* =========================
+ELEMENT
+========================= */
+
+const perangkatSim =
+document.getElementById("perangkat-sim");
+
+const ipSim =
+document.getElementById("ip-sim");
+
+const securitySim =
+document.getElementById("security-sim");
+
+/* =========================
+UNLOCK SYSTEM
+========================= */
+
+/* LEVEL 2 */
+
+if(topologiDone === "true"){
+
+  perangkatSim.classList.remove(
+    "locked-card"
+  );
+
+  perangkatSim.querySelector(".status")
+  .innerHTML = "OPEN";
+
+  perangkatSim.querySelector(".status")
+  .classList.remove("locked");
+
+  perangkatSim.querySelector(".status")
+  .classList.add("open");
+
+}
+
+/* LEVEL 3 */
+
+if(perangkatDone === "true"){
+
+  ipSim.classList.remove(
+    "locked-card"
+  );
+
+  ipSim.querySelector(".status")
+  .innerHTML = "OPEN";
+
+  ipSim.querySelector(".status")
+  .classList.remove("locked");
+
+  ipSim.querySelector(".status")
+  .classList.add("open");
+
+}
+
+/* LEVEL 4 */
+
+if(ipDone === "true"){
+
+  securitySim.classList.remove(
+    "locked-card"
+  );
+
+  securitySim.querySelector(".status")
+  .innerHTML = "OPEN";
+
+  securitySim.querySelector(".status")
+  .classList.remove("locked");
+
+  securitySim.querySelector(".status")
+  .classList.add("open");
+
+}
+
+</script>
+
+</body>
+</html>

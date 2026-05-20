@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Login - EduSmart</title>
+
+<link rel="stylesheet" href="css/style.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+
+/* =========================
+BODY
+========================= */
+
+body{
+  margin:0;
+  font-family:'Plus Jakarta Sans',sans-serif;
+
+  background:
+  linear-gradient(
+    135deg,
+    #0f172a,
+    #2563eb
+  );
+
+  min-height:100vh;
+
+  overflow:hidden;
+}
+
+/* =========================
+BACKGROUND
+========================= */
+
+.bg-circle{
+  position:absolute;
+  border-radius:50%;
+  background:rgba(255,255,255,.06);
+}
+
+.circle1{
+  width:320px;
+  height:320px;
+  top:-120px;
+  left:-120px;
+}
+
+.circle2{
+  width:240px;
+  height:240px;
+  bottom:-100px;
+  right:-100px;
+}
+
+.circle3{
+  width:160px;
+  height:160px;
+  top:40%;
+  left:52%;
+}
+
+/* =========================
+SCREEN
+========================= */
+
+.auth-screen{
+  min-height:100vh;
+
+  display:flex;
+  justify-content:center;
+  align-items:center;
+
+  padding:40px;
+
+  position:relative;
+  z-index:2;
+}
+
+/* =========================
+CARD
+========================= */
+
+.auth-card{
+  width:100%;
+  max-width:980px;
+
+  min-height:600px;
+
+  display:grid;
+  grid-template-columns:1fr 1fr;
+
+  background:rgba(255,255,255,.12);
+
+  border:1px solid rgba(255,255,255,.15);
+
+  backdrop-filter:blur(18px);
+
+  border-radius:40px;
+
+  overflow:hidden;
+
+  box-shadow:
+  0 25px 60px rgba(0,0,0,.25);
+
+  position:relative;
+}
+
+.auth-card::before{
+  content:"";
+
+  position:absolute;
+
+  width:220px;
+  height:220px;
+
+  border-radius:50%;
+
+  background:rgba(255,255,255,.05);
+
+  top:-80px;
+  right:-80px;
+}
+
+/* =========================
+LEFT SIDE
+========================= */
+
+.auth-left{
+  padding:60px;
+
+  background:
+  linear-gradient(
+    135deg,
+    rgba(255,255,255,.08),
+    rgba(255,255,255,.02)
+  );
+
+  display:flex;
+  align-items:center;
+
+  position:relative;
+  z-index:2;
+}
+
+.auth-logo{
+  width:100px;
+  height:100px;
+
+  border-radius:30px;
+
+  background:rgba(255,255,255,.12);
+
+  display:flex;
+  justify-content:center;
+  align-items:center;
+
+  font-size:44px;
+}
+
+.auth-left h1{
+  margin-top:28px;
+
+  font-size:50px;
+
+  color:white;
+}
+
+.auth-left p{
+  margin-top:18px;
+
+  line-height:1.9;
+
+  color:rgba(255,255,255,.88);
+
+  max-width:420px;
+}
+
+/* =========================
+FEATURE LIST
+========================= */
+
+.feature-list{
+  margin-top:35px;
+
+  display:flex;
+  flex-direction:column;
+  gap:16px;
+}
+
+.feature-item{
+  background:rgba(255,255,255,.08);
+
+  border:1px solid rgba(255,255,255,.12);
+
+  padding:16px 18px;
+
+  border-radius:18px;
+
+  color:white;
+
+  font-weight:600;
+}
+
+/* =========================
+RIGHT SIDE
+========================= */
+
+.auth-right{
+  padding:55px;
+
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+
+  position:relative;
+  z-index:2;
+}
+
+/* =========================
+TITLE
+========================= */
+
+.auth-title{
+  color:white;
+}
+
+.auth-title h2{
+  font-size:40px;
+}
+
+.auth-title p{
+  margin-top:12px;
+
+  line-height:1.8;
+
+  color:rgba(255,255,255,.82);
+}
+
+/* =========================
+TAB
+========================= */
+
+.auth-tabs{
+  margin-top:30px;
+
+  background:rgba(255,255,255,.08);
+
+  padding:6px;
+
+  border-radius:18px;
+
+  display:flex;
+}
+
+.auth-tab{
+  flex:1;
+
+  border:none;
+
+  background:transparent;
+
+  padding:14px;
+
+  border-radius:14px;
+
+  color:white;
+
+  font-weight:700;
+
+  cursor:pointer;
+
+  transition:.3s;
+}
+
+.auth-tab.active{
+  background:white;
+  color:#2563eb;
+}
+
+/* =========================
+FORM
+========================= */
+
+.form-box{
+  margin-top:28px;
+
+  display:flex;
+  flex-direction:column;
+  gap:18px;
+}
+
+.input-group{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+
+.input-group label{
+  color:white;
+  font-size:14px;
+  font-weight:600;
+}
+
+.auth-input{
+  border:none;
+
+  background:rgba(255,255,255,.12);
+
+  border:1px solid rgba(255,255,255,.14);
+
+  padding:16px 18px;
+
+  border-radius:18px;
+
+  color:white;
+
+  outline:none;
+
+  font-size:15px;
+}
+
+.auth-input::placeholder{
+  color:rgba(255,255,255,.6);
+}
+
+/* =========================
+BUTTON
+========================= */
+
+.auth-btn{
+  margin-top:10px;
+
+  border:none;
+
+  background:white;
+
+  color:#2563eb;
+
+  padding:18px;
+
+  border-radius:18px;
+
+  font-weight:800;
+
+  font-size:15px;
+
+  cursor:pointer;
+
+  transition:.3s;
+}
+
+.auth-btn:hover{
+  transform:translateY(-4px);
+}
+
+/* =========================
+BOTTOM
+========================= */
+
+.auth-bottom{
+  margin-top:20px;
+
+  text-align:center;
+
+  color:rgba(255,255,255,.82);
+
+  font-size:14px;
+}
+
+.auth-bottom span{
+  color:white;
+  font-weight:700;
+  cursor:pointer;
+}
+
+/* =========================
+HIDE
+========================= */
+
+.hidden{
+  display:none;
+}
+
+/* =========================
+RESPONSIVE
+========================= */
+
+@media(max-width:900px){
+
+  .auth-card{
+    grid-template-columns:1fr;
+    max-width:520px;
+  }
+
+  .auth-left{
+    display:none;
+  }
+
+  .auth-right{
+    padding:35px;
+  }
+
+}
+
+@media(max-width:600px){
+
+  .auth-right{
+    padding:28px;
+  }
+
+  .auth-title h2{
+    font-size:32px;
+  }
+
+}
+
+/* ====================================
+RESPONSIVE UNIVERSAL
+==================================== */
+
+/* TABLET */
+
+@media(max-width:992px){
+
+.hero h1{
+font-size:36px;
+}
+
+.grid,
+.status-grid,
+.info-grid,
+.quiz-section,
+.cyber-layout{
+grid-template-columns:1fr !important;
+}
+
+}
+
+/* MOBILE */
+
+@media(max-width:768px){
+
+body{
+overflow-x:hidden;
+}
+
+/* APP */
+
+.app{
+flex-direction:column;
+}
+
+/* SIDEBAR */
+
+.sidebar{
+width:100%;
+height:auto;
+border-radius:0;
+}
+
+/* MAIN */
+
+.main{
+padding:18px;
+}
+
+/* TOPBAR */
+
+.topbar{
+flex-direction:column;
+align-items:flex-start;
+gap:15px;
+}
+
+/* HERO */
+
+.hero{
+padding:25px;
+border-radius:24px;
+}
+
+.hero h1{
+font-size:28px;
+line-height:1.4;
+}
+
+.hero p{
+font-size:14px;
+line-height:1.8;
+}
+
+/* GRID */
+
+.grid,
+.status-grid,
+.info-grid,
+.quiz-section,
+.cyber-layout,
+.stats-modern{
+grid-template-columns:1fr !important;
+}
+
+/* CARD */
+
+.card,
+.panel,
+.quiz-card,
+.status-card,
+.info-card,
+.modern-box{
+padding:22px;
+border-radius:24px;
+}
+
+/* BUTTON */
+
+.btn,
+.start-btn{
+width:100%;
+}
+
+/* QUIZ */
+
+.question{
+font-size:22px;
+}
+
+.final-score{
+font-size:58px;
+}
+
+/* NETWORK */
+
+.network-map{
+overflow:auto;
+}
+
+/* LOGIN */
+
+.login-card{
+width:100%;
+max-width:420px;
+padding:30px 24px;
+}
+
+}
+
+/* SMALL MOBILE */
+
+@media(max-width:480px){
+
+.hero h1{
+font-size:24px;
+}
+
+.question{
+font-size:20px;
+}
+
+.status-value{
+font-size:28px;
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- BACKGROUND -->
+
+<div class="bg-circle circle1"></div>
+<div class="bg-circle circle2"></div>
+<div class="bg-circle circle3"></div>
+
+<!-- SCREEN -->
+
+<div class="auth-screen">
+
+<div class="auth-card">
+
+<!-- LEFT -->
+
+<div class="auth-left">
+
+<div>
+
+<div class="auth-logo">
+🌐
+</div>
+
+<h1>EduSmart</h1>
+
+<p>
+Platform pembelajaran jaringan komputer modern
+dengan simulasi interaktif, kuis networking,
+dan cyber security learning.
+</p>
+
+<div class="feature-list">
+
+<div class="feature-item">
+📚 Materi Networking Interaktif
+</div>
+
+<div class="feature-item">
+🧩 Simulasi Jaringan Modern
+</div>
+
+<div class="feature-item">
+🎮 Kuis & Challenge Networking
+</div>
+
+<div class="feature-item">
+🔐 Belajar Cyber Security
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- RIGHT -->
+
+<div class="auth-right">
+
+<div class="auth-title">
+
+<h2>Selamat Datang 👋</h2>
+
+<p>
+Masuk atau buat akun baru untuk mulai belajar networking modern.
+</p>
+
+</div>
+
+<!-- TAB -->
+
+<div class="auth-tabs">
+
+<button
+class="auth-tab active"
+id="loginTab"
+onclick="showLogin()">
+Login
+</button>
+
+<button
+class="auth-tab"
+id="registerTab"
+onclick="showRegister()">
+Daftar
+</button>
+
+</div>
+
+<!-- LOGIN -->
+
+<div id="loginForm" class="form-box">
+
+<div class="input-group">
+
+<label>Username</label>
+
+<input
+type="text"
+class="auth-input"
+id="loginUsername"
+placeholder="Masukkan username"
+>
+
+</div>
+
+<div class="input-group">
+
+<label>Password</label>
+
+<input
+type="password"
+class="auth-input"
+id="loginPassword"
+placeholder="Masukkan password"
+>
+
+</div>
+
+<button
+class="auth-btn"
+onclick="login()">
+Masuk ke Dashboard
+</button>
+
+<div class="auth-bottom">
+Belum punya akun?
+<span onclick="showRegister()">
+Daftar sekarang
+</span>
+</div>
+
+</div>
+
+<!-- REGISTER -->
+
+<div id="registerForm"
+class="form-box hidden">
+
+<div class="input-group">
+
+<label>Nama Lengkap</label>
+
+<input
+type="text"
+class="auth-input"
+placeholder="Masukkan nama lengkap"
+>
+
+</div>
+
+<div class="input-group">
+
+<label>Username</label>
+
+<input
+type="text"
+class="auth-input"
+placeholder="Buat username"
+>
+
+</div>
+
+<div class="input-group">
+
+<label>Email</label>
+
+<input
+type="email"
+class="auth-input"
+placeholder="Masukkan email"
+>
+
+</div>
+
+<div class="input-group">
+
+<label>Password</label>
+
+<input
+type="password"
+class="auth-input"
+placeholder="Buat password"
+>
+
+</div>
+
+<button
+class="auth-btn"
+onclick="register()">
+Buat Akun
+</button>
+
+<div class="auth-bottom">
+Sudah punya akun?
+<span onclick="showLogin()">
+Login sekarang
+</span>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+/* =========================
+ELEMENT
+========================= */
+
+const loginForm =
+document.getElementById("loginForm");
+
+const registerForm =
+document.getElementById("registerForm");
+
+const loginTab =
+document.getElementById("loginTab");
+
+const registerTab =
+document.getElementById("registerTab");
+
+/* =========================
+SHOW LOGIN
+========================= */
+
+function showLogin(){
+
+  loginForm.classList.remove("hidden");
+  registerForm.classList.add("hidden");
+
+  loginTab.classList.add("active");
+  registerTab.classList.remove("active");
+
+}
+
+/* =========================
+SHOW REGISTER
+========================= */
+
+function showRegister(){
+
+  registerForm.classList.remove("hidden");
+  loginForm.classList.add("hidden");
+
+  registerTab.classList.add("active");
+  loginTab.classList.remove("active");
+
+}
+
+/* =========================
+LOGIN
+========================= */
+
+function login(){
+
+  const username =
+  document.getElementById("loginUsername").value;
+
+  const password =
+  document.getElementById("loginPassword").value;
+
+  if(username === "" || password === ""){
+
+    alert("Isi username dan password dulu.");
+
+    return;
+
+  }
+
+  alert("Login berhasil!");
+
+  window.location.href =
+  "dashboard.html";
+
+}
+
+/* =========================
+REGISTER
+========================= */
+
+function register(){
+
+  alert("Akun berhasil dibuat!");
+
+  showLogin();
+
+}
+
+</script>
+
+</body>
+</html>

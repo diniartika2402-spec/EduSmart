@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Quiz IP Address - EduSmart</title>
+
+<link rel="stylesheet" href="css/style.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+
+.quiz-page{
+  display:flex;
+  flex-direction:column;
+  gap:30px;
+}
+
+/* HERO */
+
+.quiz-hero{
+  background:
+  linear-gradient(
+    135deg,
+    #16a34a,
+    #4ade80
+  );
+
+  color:white;
+
+  padding:45px;
+
+  border-radius:35px;
+
+  position:relative;
+  overflow:hidden;
+}
+
+.quiz-hero::before{
+  content:"";
+
+  position:absolute;
+
+  width:250px;
+  height:250px;
+
+  border-radius:50%;
+
+  background:rgba(255,255,255,.08);
+
+  top:-80px;
+  right:-80px;
+}
+
+.quiz-hero h1{
+  font-size:42px;
+  position:relative;
+  z-index:2;
+}
+
+.quiz-hero p{
+  margin-top:15px;
+  line-height:1.8;
+  opacity:.92;
+  position:relative;
+  z-index:2;
+}
+
+/* QUIZ */
+
+.quiz-box{
+  background:white;
+
+  padding:35px;
+
+  border-radius:35px;
+
+  box-shadow:var(--shadow);
+}
+
+.quiz-box h2{
+  margin-bottom:25px;
+  font-size:28px;
+}
+
+.question{
+  margin-bottom:30px;
+}
+
+.question h3{
+  margin-bottom:16px;
+  font-size:20px;
+}
+
+.option{
+  display:flex;
+  align-items:center;
+  gap:12px;
+
+  background:#f8fafc;
+
+  padding:16px 18px;
+
+  border-radius:18px;
+
+  margin-bottom:12px;
+
+  transition:.3s;
+}
+
+.option:hover{
+  background:#dcfce7;
+}
+
+.option input{
+  transform:scale(1.2);
+}
+
+.quiz-btn{
+  border:none;
+
+  padding:18px 28px;
+
+  border-radius:18px;
+
+  background:
+  linear-gradient(
+    135deg,
+    #16a34a,
+    #4ade80
+  );
+
+  color:white;
+
+  font-size:16px;
+  font-weight:700;
+
+  cursor:pointer;
+
+  transition:.3s;
+}
+
+.quiz-btn:hover{
+  transform:translateY(-4px);
+}
+
+/* RESULT */
+
+.result-box{
+  margin-top:25px;
+
+  padding:25px;
+
+  border-radius:25px;
+
+  text-align:center;
+
+  display:none;
+}
+
+.success{
+  background:#dcfce7;
+  color:#166534;
+}
+
+.failed{
+  background:#fee2e2;
+  color:#991b1b;
+}
+
+.back-btn{
+  display:inline-block;
+
+  margin-top:20px;
+
+  text-decoration:none;
+
+  padding:16px 24px;
+
+  border-radius:18px;
+
+  background:#0f172a;
+
+  color:white;
+
+  font-weight:700;
+}
+
+/* ====================================
+RESPONSIVE UNIVERSAL
+==================================== */
+
+/* TABLET */
+
+@media(max-width:992px){
+
+.hero h1{
+font-size:36px;
+}
+
+.grid,
+.status-grid,
+.info-grid,
+.quiz-section,
+.cyber-layout{
+grid-template-columns:1fr !important;
+}
+
+}
+
+/* MOBILE */
+
+@media(max-width:768px){
+
+body{
+overflow-x:hidden;
+}
+
+/* APP */
+
+.app{
+flex-direction:column;
+}
+
+/* SIDEBAR */
+
+.sidebar{
+width:100%;
+height:auto;
+border-radius:0;
+}
+
+/* MAIN */
+
+.main{
+padding:18px;
+}
+
+/* TOPBAR */
+
+.topbar{
+flex-direction:column;
+align-items:flex-start;
+gap:15px;
+}
+
+/* HERO */
+
+.hero{
+padding:25px;
+border-radius:24px;
+}
+
+.hero h1{
+font-size:28px;
+line-height:1.4;
+}
+
+.hero p{
+font-size:14px;
+line-height:1.8;
+}
+
+/* GRID */
+
+.grid,
+.status-grid,
+.info-grid,
+.quiz-section,
+.cyber-layout,
+.stats-modern{
+grid-template-columns:1fr !important;
+}
+
+/* CARD */
+
+.card,
+.panel,
+.quiz-card,
+.status-card,
+.info-card,
+.modern-box{
+padding:22px;
+border-radius:24px;
+}
+
+/* BUTTON */
+
+.btn,
+.start-btn{
+width:100%;
+}
+
+/* QUIZ */
+
+.question{
+font-size:22px;
+}
+
+.final-score{
+font-size:58px;
+}
+
+/* NETWORK */
+
+.network-map{
+overflow:auto;
+}
+
+/* LOGIN */
+
+.login-card{
+width:100%;
+max-width:420px;
+padding:30px 24px;
+}
+
+}
+
+/* SMALL MOBILE */
+
+@media(max-width:480px){
+
+.hero h1{
+font-size:24px;
+}
+
+.question{
+font-size:20px;
+}
+
+.status-value{
+font-size:28px;
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="app">
+
+<!-- SIDEBAR -->
+
+<aside class="sidebar">
+
+<div>
+
+<div class="logo-box">
+
+<div class="logo">
+🌐
+</div>
+
+<div>
+<h2>EduSmart</h2>
+<p>Network Learning</p>
+</div>
+
+</div>
+
+<div class="nav-menu">
+
+<a href="dashboard.html"
+class="nav-link">
+🏠 Dashboard
+</a>
+
+<a href="materi.html"
+class="nav-link active">
+📚 Materi
+</a>
+
+<a href="simulasi.html"
+class="nav-link">
+🧩 Simulasi
+</a>
+
+<a href="kuis.html"
+class="nav-link">
+🎮 Kuis
+</a>
+
+</div>
+
+</div>
+
+</aside>
+
+<!-- MAIN -->
+
+<main class="main quiz-page">
+
+<!-- HERO -->
+
+<div class="quiz-hero">
+
+<h1>💻 Quiz IP Address</h1>
+
+<p>
+Uji kemampuanmu tentang IP Address,
+Subnet Mask,
+dan Gateway.
+Jawab minimal 3 soal benar untuk membuka Cyber Security.
+</p>
+
+</div>
+
+<!-- QUIZ -->
+
+<div class="quiz-box">
+
+<h2>📚 Jawab Pertanyaan Berikut</h2>
+
+<!-- SOAL 1 -->
+
+<div class="question">
+
+<h3>
+1. IPv4 terdiri dari berapa bit?
+</h3>
+
+<label class="option">
+<input type="radio"
+name="q1"
+value="16">
+
+16 Bit
+</label>
+
+<label class="option">
+<input type="radio"
+name="q1"
+value="32">
+
+32 Bit
+</label>
+
+<label class="option">
+<input type="radio"
+name="q1"
+value="64">
+
+64 Bit
+</label>
+
+</div>
+
+<!-- SOAL 2 -->
+
+<div class="question">
+
+<h3>
+2. Subnet mask default Class C adalah?
+</h3>
+
+<label class="option">
+<input type="radio"
+name="q2"
+value="255">
+
+255.255.255.0
+</label>
+
+<label class="option">
+<input type="radio"
+name="q2"
+value="0">
+
+0.0.0.0
+</label>
+
+<label class="option">
+<input type="radio"
+name="q2"
+value="128">
+
+255.0.0.0
+</label>
+
+</div>
+
+<!-- SOAL 3 -->
+
+<div class="question">
+
+<h3>
+3. Gateway berfungsi untuk?
+</h3>
+
+<label class="option">
+<input type="radio"
+name="q3"
+value="printer">
+
+Menghubungkan printer
+</label>
+
+<label class="option">
+<input type="radio"
+name="q3"
+value="gateway">
+
+Penghubung ke jaringan lain
+</label>
+
+<label class="option">
+<input type="radio"
+name="q3"
+value="ram">
+
+Menyimpan data
+</label>
+
+</div>
+
+<!-- SOAL 4 -->
+
+<div class="question">
+
+<h3>
+4. IP Address digunakan untuk?
+</h3>
+
+<label class="option">
+<input type="radio"
+name="q4"
+value="identitas">
+
+Identitas perangkat jaringan
+</label>
+
+<label class="option">
+<input type="radio"
+name="q4"
+value="monitor">
+
+Menampilkan gambar
+</label>
+
+<label class="option">
+<input type="radio"
+name="q4"
+value="mouse">
+
+Menggerakkan kursor
+</label>
+
+</div>
+
+<button class="quiz-btn"
+onclick="checkQuiz()">
+
+🚀 Selesaikan Quiz
+
+</button>
+
+<!-- RESULT -->
+
+<div class="result-box"
+id="resultBox">
+
+<h2 id="resultTitle"></h2>
+
+<p id="resultText"></p>
+
+<a href="ip.html"
+class="back-btn">
+
+⬅ Kembali ke Materi
+
+</a>
+
+</div>
+
+</div>
+
+</main>
+
+</div>
+
+<script>
+
+function checkQuiz(){
+
+  let score = 0;
+
+  const q1 =
+  document.querySelector(
+    'input[name="q1"]:checked'
+  );
+
+  const q2 =
+  document.querySelector(
+    'input[name="q2"]:checked'
+  );
+
+  const q3 =
+  document.querySelector(
+    'input[name="q3"]:checked'
+  );
+
+  const q4 =
+  document.querySelector(
+    'input[name="q4"]:checked'
+  );
+
+  /* JAWABAN */
+
+  if(q1 && q1.value === "32"){
+    score++;
+  }
+
+  if(q2 && q2.value === "255"){
+    score++;
+  }
+
+  if(q3 && q3.value === "gateway"){
+    score++;
+  }
+
+  if(q4 && q4.value === "identitas"){
+    score++;
+  }
+
+  const resultBox =
+  document.getElementById("resultBox");
+
+  const resultTitle =
+  document.getElementById("resultTitle");
+
+  const resultText =
+  document.getElementById("resultText");
+
+  resultBox.style.display = "block";
+
+  /* LULUS */
+
+  if(score >= 3){
+
+    resultBox.classList.add("success");
+
+    resultTitle.innerHTML =
+    "🎉 Quiz Berhasil!";
+
+    resultText.innerHTML =
+    "Skor kamu " +
+    score +
+    "/4. Cyber Security berhasil dibuka!";
+
+    /* UNLOCK CYBER SECURITY */
+
+    localStorage.setItem(
+      "ipDone",
+      "true"
+    );
+
+    /* XP */
+
+    localStorage.setItem(
+      "xp",
+      "70"
+    );
+
+  }
+
+  /* GAGAL */
+
+  else{
+
+    resultBox.classList.add("failed");
+
+    resultTitle.innerHTML =
+    "❌ Quiz Gagal";
+
+    resultText.innerHTML =
+    "Skor kamu " +
+    score +
+    "/4. Pelajari materi lagi.";
+
+  }
+
+}
+
+</script>
+
+</body>
+</html>

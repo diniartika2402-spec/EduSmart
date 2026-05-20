@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Quiz Menu - EduSmart</title>
+
+<link rel="stylesheet" href="css/style.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+
+body{
+background:#f8fafc;
+font-family:'Plus Jakarta Sans',sans-serif;
+}
+
+/* =========================
+PAGE
+========================= */
+
+.quiz-page{
+display:flex;
+flex-direction:column;
+gap:30px;
+}
+
+/* =========================
+HERO
+========================= */
+
+.quiz-hero{
+background:
+linear-gradient(
+135deg,
+#2563eb,
+#3b82f6
+);
+
+padding:50px;
+border-radius:36px;
+color:white;
+position:relative;
+overflow:hidden;
+
+box-shadow:
+0 25px 60px rgba(37,99,235,.25);
+}
+
+.quiz-hero::before{
+content:"";
+
+position:absolute;
+
+width:320px;
+height:320px;
+
+border-radius:50%;
+
+background:rgba(255,255,255,.08);
+
+top:-120px;
+right:-120px;
+}
+
+.quiz-hero h1{
+font-size:48px;
+position:relative;
+z-index:2;
+}
+
+.quiz-hero p{
+margin-top:16px;
+line-height:1.9;
+max-width:760px;
+color:rgba(255,255,255,.9);
+position:relative;
+z-index:2;
+}
+
+/* =========================
+INFO GRID
+========================= */
+
+.info-grid{
+display:grid;
+
+grid-template-columns:
+repeat(auto-fit,minmax(240px,1fr));
+
+gap:22px;
+}
+
+.info-card{
+background:white;
+
+padding:28px;
+
+border-radius:30px;
+
+box-shadow:0 10px 30px rgba(0,0,0,.06);
+
+transition:.3s;
+}
+
+.info-card:hover{
+transform:translateY(-6px);
+}
+
+.info-card h3{
+color:#64748b;
+font-size:15px;
+}
+
+.info-value{
+margin-top:12px;
+
+font-size:38px;
+font-weight:800;
+}
+
+.blue{
+color:#2563eb;
+}
+
+.green{
+color:#16a34a;
+}
+
+.yellow{
+color:#d97706;
+}
+
+.red{
+color:#dc2626;
+}
+
+/* =========================
+QUIZ SECTION
+========================= */
+
+.quiz-section{
+display:grid;
+
+grid-template-columns:1.2fr .8fr;
+
+gap:25px;
+}
+
+@media(max-width:1000px){
+
+.quiz-section{
+grid-template-columns:1fr;
+}
+
+}
+
+/* =========================
+QUIZ CARD
+========================= */
+
+.quiz-card{
+background:white;
+
+border-radius:36px;
+
+padding:35px;
+
+box-shadow:0 10px 30px rgba(0,0,0,.06);
+
+position:relative;
+overflow:hidden;
+}
+
+.quiz-card::before{
+content:"";
+
+position:absolute;
+
+width:200px;
+height:200px;
+
+border-radius:50%;
+
+background:rgba(37,99,235,.05);
+
+top:-80px;
+right:-80px;
+}
+
+.quiz-card h2{
+font-size:34px;
+position:relative;
+z-index:2;
+}
+
+.quiz-card p{
+margin-top:18px;
+line-height:1.9;
+color:#64748b;
+position:relative;
+z-index:2;
+}
+
+/* =========================
+FEATURE
+========================= */
+
+.feature-list{
+margin-top:28px;
+
+display:flex;
+flex-direction:column;
+gap:18px;
+}
+
+.feature{
+background:#f8fafc;
+
+padding:18px 22px;
+
+border-radius:20px;
+
+font-weight:600;
+
+display:flex;
+align-items:center;
+gap:14px;
+}
+
+/* =========================
+BUTTON
+========================= */
+
+.start-btn{
+margin-top:35px;
+
+padding:18px 28px;
+
+border:none;
+
+border-radius:20px;
+
+background:
+linear-gradient(
+135deg,
+#2563eb,
+#3b82f6
+);
+
+color:white;
+
+font-size:17px;
+font-weight:700;
+
+cursor:pointer;
+
+transition:.3s;
+}
+
+.start-btn:hover{
+transform:translateY(-5px);
+box-shadow:0 20px 40px rgba(37,99,235,.25);
+}
+
+/* =========================
+SIDE PANEL
+========================= */
+
+.side-panel{
+display:flex;
+flex-direction:column;
+gap:25px;
+}
+
+.panel{
+background:white;
+
+padding:30px;
+
+border-radius:32px;
+
+box-shadow:0 10px 30px rgba(0,0,0,.06);
+}
+
+.panel h3{
+font-size:28px;
+}
+
+.panel p{
+margin-top:14px;
+line-height:1.9;
+color:#64748b;
+}
+
+/* =========================
+TOPICS
+========================= */
+
+.topic-list{
+margin-top:22px;
+
+display:flex;
+flex-wrap:wrap;
+gap:14px;
+}
+
+.topic{
+padding:14px 18px;
+
+border-radius:16px;
+
+background:#eff6ff;
+
+color:#2563eb;
+
+font-weight:700;
+}
+
+/* =========================
+TIPS
+========================= */
+
+.tip-box{
+margin-top:22px;
+
+background:#f8fafc;
+
+padding:20px;
+
+border-radius:20px;
+
+line-height:1.8;
+
+font-size:15px;
+color:#475569;
+}
+
+/* ====================================
+RESPONSIVE UNIVERSAL
+==================================== */
+
+/* TABLET */
+
+@media(max-width:992px){
+
+.hero h1{
+font-size:36px;
+}
+
+.grid,
+.status-grid,
+.info-grid,
+.quiz-section,
+.cyber-layout{
+grid-template-columns:1fr !important;
+}
+
+}
+
+/* MOBILE */
+
+@media(max-width:768px){
+
+body{
+overflow-x:hidden;
+}
+
+/* APP */
+
+.app{
+flex-direction:column;
+}
+
+/* SIDEBAR */
+
+.sidebar{
+width:100%;
+height:auto;
+border-radius:0;
+}
+
+/* MAIN */
+
+.main{
+padding:18px;
+}
+
+/* TOPBAR */
+
+.topbar{
+flex-direction:column;
+align-items:flex-start;
+gap:15px;
+}
+
+/* HERO */
+
+.hero{
+padding:25px;
+border-radius:24px;
+}
+
+.hero h1{
+font-size:28px;
+line-height:1.4;
+}
+
+.hero p{
+font-size:14px;
+line-height:1.8;
+}
+
+/* GRID */
+
+.grid,
+.status-grid,
+.info-grid,
+.quiz-section,
+.cyber-layout,
+.stats-modern{
+grid-template-columns:1fr !important;
+}
+
+/* CARD */
+
+.card,
+.panel,
+.quiz-card,
+.status-card,
+.info-card,
+.modern-box{
+padding:22px;
+border-radius:24px;
+}
+
+/* BUTTON */
+
+.btn,
+.start-btn{
+width:100%;
+}
+
+/* QUIZ */
+
+.question{
+font-size:22px;
+}
+
+.final-score{
+font-size:58px;
+}
+
+/* NETWORK */
+
+.network-map{
+overflow:auto;
+}
+
+/* LOGIN */
+
+.login-card{
+width:100%;
+max-width:420px;
+padding:30px 24px;
+}
+
+}
+
+/* SMALL MOBILE */
+
+@media(max-width:480px){
+
+.hero h1{
+font-size:24px;
+}
+
+.question{
+font-size:20px;
+}
+
+.status-value{
+font-size:28px;
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="app">
+
+<!-- SIDEBAR -->
+
+<aside class="sidebar">
+
+<div>
+
+<div class="logo-box">
+
+<div class="logo">
+🌐
+</div>
+
+<div>
+<h2>EduSmart</h2>
+<p>Network Learning</p>
+</div>
+
+</div>
+
+<div class="nav-menu">
+
+<a href="dashboard.html" class="nav-link">
+🏠 Dashboard
+</a>
+
+<a href="materi.html" class="nav-link">
+📚 Materi
+</a>
+
+<a href="simulasi.html" class="nav-link">
+🧩 Simulasi
+</a>
+
+<a href="kuis.html" class="nav-link active">
+🎮 Quiz
+</a>
+
+</div>
+
+</div>
+
+</aside>
+
+<!-- MAIN -->
+
+<main class="main quiz-page">
+
+<!-- HERO -->
+
+<div class="quiz-hero">
+
+<h1>
+🎮 Quiz Evaluasi Pembelajaran
+</h1>
+
+<p>
+Uji pemahamanmu tentang jaringan komputer melalui soal acak dari seluruh materi EduSmart.
+Quiz ini dirancang untuk membantu mengevaluasi kemampuan analisis jaringan, perangkat, IP Address, keamanan jaringan, dan troubleshooting.
+</p>
+
+</div>
+
+<!-- INFO -->
+
+<div class="info-grid">
+
+<div class="info-card">
+<h3>Total Soal</h3>
+<div class="info-value blue">
+10
+</div>
+</div>
+
+<div class="info-card">
+<h3>Timer Quiz</h3>
+<div class="info-value red">
+15s
+</div>
+</div>
+
+<div class="info-card">
+<h3>Reward XP</h3>
+<div class="info-value green">
++10
+</div>
+</div>
+
+<div class="info-card">
+<h3>Materi</h3>
+<div class="info-value yellow">
+5 Topik
+</div>
+</div>
+
+</div>
+
+<!-- SECTION -->
+
+<div class="quiz-section">
+
+<!-- MAIN CARD -->
+
+<div class="quiz-card">
+
+<h2>
+🧠 Mulai Evaluasi
+</h2>
+
+<p>
+Quiz akan menampilkan soal acak dari seluruh materi pembelajaran.
+Setiap soal memiliki timer dan akan memberikan feedback hasil belajar setelah quiz selesai.
+</p>
+
+<div class="feature-list">
+
+<div class="feature">
+📚 Soal Acak Semua Materi
+</div>
+
+<div class="feature">
+⏳ Timer Interaktif
+</div>
+
+<div class="feature">
+⭐ Sistem XP Pembelajaran
+</div>
+
+<div class="feature">
+📊 Analisis Hasil Belajar
+</div>
+
+<div class="feature">
+🎯 Feedback Pemahaman Materi
+</div>
+
+</div>
+
+<a href="quiz-game.html">
+
+<button class="start-btn">
+🚀 Mulai Quiz Sekarang
+</button>
+
+</a>
+
+</div>
+
+<!-- SIDE -->
+
+<div class="side-panel">
+
+<div class="panel">
+
+<h3>
+📖 Materi yang Diujikan
+</h3>
+
+<p>
+Quiz mencakup seluruh topik utama jaringan komputer.
+</p>
+
+<div class="topic-list">
+
+<div class="topic">
+🌐 Topologi
+</div>
+
+<div class="topic">
+📡 IP Address
+</div>
+
+<div class="topic">
+🖥 Perangkat
+</div>
+
+<div class="topic">
+🔐 Keamanan
+</div>
+
+<div class="topic">
+🛠 Troubleshooting
+</div>
+
+</div>
+
+</div>
+
+<div class="panel">
+
+<h3>
+💡 Tips Sebelum Quiz
+</h3>
+
+<div class="tip-box">
+
+✔ Pelajari kembali materi jaringan komputer<br><br>
+
+✔ Perhatikan fungsi perangkat jaringan<br><br>
+
+✔ Pahami konsep IP Address dan DNS<br><br>
+
+✔ Pelajari keamanan jaringan dasar<br><br>
+
+✔ Fokus saat timer berjalan
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</main>
+
+</div>
+
+<script src="js/app.js"></script>
+
+</body>
+</html>

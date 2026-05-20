@@ -1,0 +1,1020 @@
+```html
+<!DOCTYPE html>
+<html lang="id">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Quiz Evaluasi - EduSmart</title>
+
+<link rel="stylesheet" href="css/style.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+
+body{
+background:#0f172a;
+font-family:'Plus Jakarta Sans',sans-serif;
+color:white;
+overflow-x:hidden;
+}
+
+/* =========================
+BACKGROUND
+========================= */
+
+.bg{
+position:fixed;
+inset:0;
+z-index:-1;
+overflow:hidden;
+}
+
+.blur{
+position:absolute;
+border-radius:50%;
+filter:blur(90px);
+opacity:.25;
+animation:float 10s infinite ease-in-out;
+}
+
+.blur1{
+width:350px;
+height:350px;
+background:#2563eb;
+top:-100px;
+left:-100px;
+}
+
+.blur2{
+width:300px;
+height:300px;
+background:#7c3aed;
+bottom:-120px;
+right:-100px;
+}
+
+@keyframes float{
+
+0%{
+transform:translateY(0px);
+}
+
+50%{
+transform:translateY(20px);
+}
+
+100%{
+transform:translateY(0px);
+}
+
+}
+
+/* =========================
+LAYOUT
+========================= */
+
+.quiz-page{
+max-width:1100px;
+margin:auto;
+padding:30px;
+}
+
+/* =========================
+TOPBAR
+========================= */
+
+.topbar{
+display:flex;
+justify-content:space-between;
+align-items:center;
+gap:20px;
+margin-bottom:25px;
+flex-wrap:wrap;
+}
+
+.quiz-badge{
+padding:14px 22px;
+border-radius:999px;
+background:#1e293b;
+font-weight:700;
+}
+
+.timer-box{
+background:#111827;
+padding:14px 24px;
+border-radius:18px;
+font-size:24px;
+font-weight:800;
+}
+
+/* =========================
+HERO
+========================= */
+
+.hero{
+background:
+linear-gradient(
+135deg,
+#2563eb,
+#3b82f6
+);
+
+padding:40px;
+border-radius:35px;
+position:relative;
+overflow:hidden;
+}
+
+.hero::before{
+content:"";
+position:absolute;
+width:280px;
+height:280px;
+border-radius:50%;
+background:rgba(255,255,255,.08);
+top:-120px;
+right:-80px;
+}
+
+.hero h1{
+font-size:42px;
+}
+
+.hero p{
+margin-top:14px;
+line-height:1.9;
+max-width:700px;
+color:rgba(255,255,255,.92);
+}
+
+/* =========================
+STATUS
+========================= */
+
+.status-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:20px;
+margin-top:25px;
+}
+
+.status-card{
+background:#111827;
+padding:25px;
+border-radius:28px;
+border:1px solid rgba(255,255,255,.06);
+}
+
+.status-card h3{
+font-size:14px;
+color:#94a3b8;
+}
+
+.status-value{
+margin-top:10px;
+font-size:34px;
+font-weight:800;
+}
+
+/* =========================
+PROGRESS
+========================= */
+
+.progress-wrap{
+margin-top:25px;
+}
+
+.progress-bar{
+width:100%;
+height:16px;
+background:#1e293b;
+border-radius:999px;
+overflow:hidden;
+}
+
+.progress-fill{
+height:100%;
+width:0%;
+background:
+linear-gradient(
+135deg,
+#3b82f6,
+#60a5fa
+);
+
+transition:.3s;
+}
+
+/* =========================
+QUIZ
+========================= */
+
+.quiz-box{
+margin-top:30px;
+background:#111827;
+padding:40px;
+border-radius:35px;
+border:1px solid rgba(255,255,255,.06);
+}
+
+.question-category{
+display:inline-block;
+padding:10px 18px;
+border-radius:999px;
+background:#1e293b;
+font-size:14px;
+font-weight:700;
+color:#60a5fa;
+}
+
+.question{
+margin-top:24px;
+font-size:34px;
+line-height:1.6;
+font-weight:800;
+}
+
+.scenario{
+margin-top:24px;
+background:#0f172a;
+padding:24px;
+border-radius:24px;
+line-height:1.9;
+border:1px solid rgba(255,255,255,.06);
+}
+
+/* =========================
+OPTIONS
+========================= */
+
+.options{
+margin-top:30px;
+display:flex;
+flex-direction:column;
+gap:16px;
+}
+
+.option{
+background:#1e293b;
+padding:18px 22px;
+border-radius:18px;
+cursor:pointer;
+transition:.25s;
+font-weight:700;
+border:2px solid transparent;
+}
+
+.option:hover{
+transform:translateX(6px);
+border-color:#3b82f6;
+}
+
+.correct{
+background:#14532d !important;
+border-color:#22c55e !important;
+}
+
+.wrong{
+background:#7f1d1d !important;
+border-color:#ef4444 !important;
+}
+
+/* =========================
+BUTTON
+========================= */
+
+.btn{
+margin-top:30px;
+padding:16px 24px;
+border:none;
+border-radius:18px;
+background:
+linear-gradient(
+135deg,
+#2563eb,
+#3b82f6
+);
+
+color:white;
+font-weight:700;
+cursor:pointer;
+transition:.3s;
+}
+
+.btn:hover{
+transform:translateY(-4px);
+}
+
+/* =========================
+RESULT
+========================= */
+
+.result-box{
+display:none;
+margin-top:30px;
+background:#111827;
+padding:50px;
+border-radius:35px;
+text-align:center;
+}
+
+.final-score{
+font-size:90px;
+font-weight:800;
+color:#22c55e;
+}
+
+.feedback-title{
+margin-top:20px;
+font-size:34px;
+font-weight:800;
+}
+
+.feedback-desc{
+margin-top:18px;
+line-height:2;
+color:#cbd5e1;
+}
+
+.analysis-box{
+margin-top:35px;
+background:#0f172a;
+padding:30px;
+border-radius:28px;
+text-align:left;
+line-height:2;
+}
+
+/* =========================
+MOBILE
+========================= */
+
+@media(max-width:768px){
+
+.quiz-page{
+padding:20px;
+}
+
+.hero h1{
+font-size:30px;
+}
+
+.question{
+font-size:24px;
+}
+
+}
+
+/* ====================================
+RESPONSIVE UNIVERSAL
+==================================== */
+
+/* TABLET */
+
+@media(max-width:992px){
+
+.hero h1{
+font-size:36px;
+}
+
+.grid,
+.status-grid,
+.info-grid,
+.quiz-section,
+.cyber-layout{
+grid-template-columns:1fr !important;
+}
+
+}
+
+/* MOBILE */
+
+@media(max-width:768px){
+
+body{
+overflow-x:hidden;
+}
+
+/* APP */
+
+.app{
+flex-direction:column;
+}
+
+/* SIDEBAR */
+
+.sidebar{
+width:100%;
+height:auto;
+border-radius:0;
+}
+
+/* MAIN */
+
+.main{
+padding:18px;
+}
+
+/* TOPBAR */
+
+.topbar{
+flex-direction:column;
+align-items:flex-start;
+gap:15px;
+}
+
+/* HERO */
+
+.hero{
+padding:25px;
+border-radius:24px;
+}
+
+.hero h1{
+font-size:28px;
+line-height:1.4;
+}
+
+.hero p{
+font-size:14px;
+line-height:1.8;
+}
+
+/* GRID */
+
+.grid,
+.status-grid,
+.info-grid,
+.quiz-section,
+.cyber-layout,
+.stats-modern{
+grid-template-columns:1fr !important;
+}
+
+/* CARD */
+
+.card,
+.panel,
+.quiz-card,
+.status-card,
+.info-card,
+.modern-box{
+padding:22px;
+border-radius:24px;
+}
+
+/* BUTTON */
+
+.btn,
+.start-btn{
+width:100%;
+}
+
+/* QUIZ */
+
+.question{
+font-size:22px;
+}
+
+.final-score{
+font-size:58px;
+}
+
+/* NETWORK */
+
+.network-map{
+overflow:auto;
+}
+
+/* LOGIN */
+
+.login-card{
+width:100%;
+max-width:420px;
+padding:30px 24px;
+}
+
+}
+
+/* SMALL MOBILE */
+
+@media(max-width:480px){
+
+.hero h1{
+font-size:24px;
+}
+
+.question{
+font-size:20px;
+}
+
+.status-value{
+font-size:28px;
+}
+
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="bg">
+
+<div class="blur blur1"></div>
+<div class="blur blur2"></div>
+
+</div>
+
+<div class="quiz-page">
+
+<!-- TOPBAR -->
+
+<div class="topbar">
+
+<div class="quiz-badge">
+📚 Quiz Evaluasi Materi
+</div>
+
+<div class="timer-box">
+⏳ <span id="timer">15</span>
+</div>
+
+</div>
+
+<!-- HERO -->
+
+<div class="hero">
+
+<h1>
+🧠 Evaluasi Pembelajaran
+</h1>
+
+<p>
+Uji pemahamanmu tentang jaringan komputer melalui soal acak dari seluruh materi pembelajaran EduSmart.
+</p>
+
+</div>
+
+<!-- STATUS -->
+
+<div class="status-grid">
+
+<div class="status-card">
+<h3>Score</h3>
+<div class="status-value" id="score">
+0
+</div>
+</div>
+
+<div class="status-card">
+<h3>XP</h3>
+<div class="status-value" id="xp">
+0
+</div>
+</div>
+
+<div class="status-card">
+<h3>Progress</h3>
+<div class="status-value" id="progressText">
+1/10
+</div>
+</div>
+
+<div class="status-card">
+<h3>Materi</h3>
+<div class="status-value" id="materiLabel">
+Jaringan
+</div>
+</div>
+
+</div>
+
+<!-- PROGRESS -->
+
+<div class="progress-wrap">
+
+<div class="progress-bar">
+
+<div class="progress-fill" id="progressFill"></div>
+
+</div>
+
+</div>
+
+<!-- QUIZ -->
+
+<div class="quiz-box" id="quizBox">
+
+<div class="question-category" id="questionCategory">
+Topologi Jaringan
+</div>
+
+<div class="question" id="question">
+Loading...
+</div>
+
+<div class="scenario" id="scenario">
+Loading...
+</div>
+
+<div class="options" id="options"></div>
+
+</div>
+
+<!-- RESULT -->
+
+<div class="result-box" id="resultBox">
+
+<div class="final-score" id="finalScore">
+0
+</div>
+
+<div class="feedback-title" id="feedbackTitle">
+Selamat!
+</div>
+
+<div class="feedback-desc" id="feedbackDesc">
+Feedback
+</div>
+
+<div class="analysis-box" id="analysisBox">
+
+Topik yang paling dikuasai:
+✔ IP Address
+
+</div>
+
+<a href="materi.html">
+
+<button class="btn">
+Kembali ke Materi
+</button>
+
+</a>
+
+</div>
+
+</div>
+
+<script>
+
+/* =========================
+QUESTIONS
+========================= */
+
+const questions = [
+
+{
+category:"Topologi",
+materi:"Topologi Jaringan",
+q:"Apa fungsi topologi jaringan?",
+s:"Administrator sedang merancang struktur jaringan komputer.",
+a:[
+"Mengatur bentuk koneksi jaringan",
+"Menyimpan data",
+"Menghapus virus",
+"Mencetak dokumen"
+],
+c:0
+},
+
+{
+category:"IP Address",
+materi:"IP Address",
+q:"IPv4 terdiri dari berapa bit?",
+s:"Teknisi sedang mengatur alamat IP komputer.",
+a:[
+"16 bit",
+"32 bit",
+"64 bit",
+"128 bit"
+],
+c:1
+},
+
+{
+category:"Perangkat",
+materi:"Perangkat Jaringan",
+q:"Perangkat untuk menghubungkan jaringan berbeda adalah?",
+s:"Perusahaan ingin menghubungkan dua jaringan kantor.",
+a:[
+"Switch",
+"Router",
+"Hub",
+"Access Point"
+],
+c:1
+},
+
+{
+category:"Keamanan",
+materi:"Keamanan Jaringan",
+q:"Apa fungsi firewall?",
+s:"Administrator ingin melindungi jaringan dari akses asing.",
+a:[
+"Menyimpan file",
+"Mencetak dokumen",
+"Menyaring lalu lintas jaringan",
+"Menghapus keyboard"
+],
+c:2
+},
+
+{
+category:"Troubleshooting",
+materi:"Troubleshooting",
+q:"Ping ke IP berhasil tetapi website tidak bisa dibuka. Penyebabnya?",
+s:"Internet aktif tetapi domain gagal diakses.",
+a:[
+"DNS bermasalah",
+"Mouse rusak",
+"Monitor mati",
+"RAM penuh"
+],
+c:0
+}
+
+];
+
+/* =========================
+RANDOM
+========================= */
+
+questions.sort(()=>Math.random()-0.5);
+
+/* =========================
+STATE
+========================= */
+
+let current = 0;
+let score = 0;
+let xp = 0;
+let timer = 15;
+
+let categoryScore = {};
+
+/* =========================
+LOAD QUESTION
+========================= */
+
+function loadQuestion(){
+
+if(current >= questions.length){
+
+finishQuiz();
+return;
+
+}
+
+const q = questions[current];
+
+document.getElementById("questionCategory")
+.innerHTML = q.category;
+
+document.getElementById("materiLabel")
+.innerHTML = q.materi;
+
+document.getElementById("question")
+.innerHTML = q.q;
+
+document.getElementById("scenario")
+.innerHTML = q.s;
+
+document.getElementById("progressText")
+.innerHTML =
+`${current+1}/${questions.length}`;
+
+const options =
+document.getElementById("options");
+
+options.innerHTML = "";
+
+q.a.forEach((answer,index)=>{
+
+const div =
+document.createElement("div");
+
+div.classList.add("option");
+
+div.innerHTML = answer;
+
+div.onclick = ()=>{
+
+checkAnswer(index,div);
+
+};
+
+options.appendChild(div);
+
+});
+
+updateProgress();
+startTimer();
+
+}
+
+/* =========================
+CHECK
+========================= */
+
+function checkAnswer(index,element){
+
+const q = questions[current];
+
+clearInterval(window.quizTimer);
+
+const allOptions =
+document.querySelectorAll(".option");
+
+allOptions.forEach(opt=>{
+opt.style.pointerEvents = "none";
+});
+
+if(index === q.c){
+
+element.classList.add("correct");
+
+score += 20;
+xp += 10;
+
+if(!categoryScore[q.category]){
+categoryScore[q.category] = 0;
+}
+
+categoryScore[q.category]++;
+
+}
+
+else{
+
+element.classList.add("wrong");
+
+allOptions[q.c]
+.classList.add("correct");
+
+}
+
+document.getElementById("score")
+.innerHTML = score;
+
+document.getElementById("xp")
+.innerHTML = xp;
+
+setTimeout(()=>{
+
+current++;
+loadQuestion();
+
+},1200);
+
+}
+
+/* =========================
+TIMER
+========================= */
+
+function startTimer(){
+
+clearInterval(window.quizTimer);
+
+timer = 15;
+
+document.getElementById("timer")
+.innerHTML = timer;
+
+window.quizTimer =
+setInterval(()=>{
+
+timer--;
+
+document.getElementById("timer")
+.innerHTML = timer;
+
+if(timer <= 0){
+
+clearInterval(window.quizTimer);
+
+current++;
+loadQuestion();
+
+}
+
+},1000);
+
+}
+
+/* =========================
+PROGRESS
+========================= */
+
+function updateProgress(){
+
+const progress =
+(current/questions.length)*100;
+
+document.getElementById("progressFill")
+.style.width =
+progress + "%";
+
+}
+
+/* =========================
+FINISH
+========================= */
+
+function finishQuiz(){
+
+document.getElementById("quizBox")
+.style.display = "none";
+
+document.getElementById("resultBox")
+.style.display = "block";
+
+document.getElementById("finalScore")
+.innerHTML = score;
+
+let title = "";
+let desc = "";
+
+if(score >= 80){
+
+title = "🎉 Selamat!";
+
+desc =
+"Kamu sudah menguasai materi jaringan komputer dengan sangat baik. Pertahankan kemampuan analisismu dan terus eksplorasi materi lanjutan.";
+
+}
+
+else if(score >= 50){
+
+title = "⚡ Bagus!";
+
+desc =
+"Kamu sudah memahami sebagian besar materi jaringan komputer. Coba pelajari kembali beberapa topik tertentu agar semakin mahir.";
+
+}
+
+else{
+
+title = "📚 Tetap Semangat!";
+
+desc =
+"Kamu masih perlu mempelajari kembali dasar jaringan komputer. Latihan lebih banyak akan membantu meningkatkan pemahamanmu.";
+
+}
+
+document.getElementById("feedbackTitle")
+.innerHTML = title;
+
+document.getElementById("feedbackDesc")
+.innerHTML = desc;
+
+/* ANALYSIS */
+
+let bestCategory =
+Object.keys(categoryScore)
+.reduce((a,b)=>
+categoryScore[a] > categoryScore[b]
+? a : b
+);
+
+document.getElementById("analysisBox")
+.innerHTML = `
+
+<h2>
+📊 Analisis Hasil Belajar
+</h2>
+
+<br>
+
+✔ Topik yang paling dikuasai:
+<b>${bestCategory}</b>
+
+<br><br>
+
+⭐ Total XP:
+<b>${xp}</b>
+
+<br><br>
+
+📖 Terus tingkatkan kemampuan jaringan komputer melalui latihan dan simulasi EduSmart.
+
+`;
+
+}
+
+/* =========================
+START
+========================= */
+
+loadQuestion();
+
+</script>
+
+</body>
+</html>
+```

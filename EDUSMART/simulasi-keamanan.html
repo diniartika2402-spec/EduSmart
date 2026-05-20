@@ -1,0 +1,1281 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Simulasi Cyber Security - EduSmart</title>
+
+<link rel="stylesheet" href="css/style.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+
+body{
+  background:#f8fafc;
+}
+
+/* ================= PAGE ================= */
+
+.sim-page{
+  display:flex;
+  flex-direction:column;
+  gap:30px;
+}
+
+/* ================= HERO ================= */
+
+.hero{
+  background:
+  linear-gradient(
+    135deg,
+    #0f172a,
+    #2563eb
+  );
+
+  border-radius:36px;
+
+  padding:45px;
+
+  color:white;
+
+  position:relative;
+  overflow:hidden;
+
+  box-shadow:
+  0 25px 60px rgba(37,99,235,.25);
+}
+
+.hero::before{
+  content:"";
+
+  position:absolute;
+
+  width:320px;
+  height:320px;
+
+  border-radius:50%;
+
+  background:rgba(255,255,255,.08);
+
+  top:-120px;
+  right:-120px;
+}
+
+.hero h1{
+  font-size:46px;
+  position:relative;
+  z-index:2;
+}
+
+.hero p{
+  margin-top:16px;
+
+  line-height:1.9;
+
+  color:rgba(255,255,255,.88);
+
+  max-width:760px;
+
+  position:relative;
+  z-index:2;
+}
+
+/* ================= STATUS ================= */
+
+.status-grid{
+  display:grid;
+
+  grid-template-columns:
+  repeat(auto-fit,minmax(220px,1fr));
+
+  gap:20px;
+}
+
+.status-card{
+  background:white;
+
+  border-radius:28px;
+
+  padding:28px;
+
+  box-shadow:0 10px 30px rgba(0,0,0,.06);
+
+  transition:.3s;
+}
+
+.status-card:hover{
+  transform:translateY(-6px);
+}
+
+.status-card h3{
+  color:#64748b;
+  font-size:15px;
+}
+
+.status-value{
+  margin-top:12px;
+
+  font-size:38px;
+  font-weight:800;
+}
+
+.green{
+  color:#16a34a;
+}
+
+.red{
+  color:#dc2626;
+}
+
+.yellow{
+  color:#d97706;
+}
+
+.blue{
+  color:#2563eb;
+}
+
+/* ================= LAYOUT ================= */
+
+.cyber-layout{
+  display:grid;
+
+  grid-template-columns:1.3fr .7fr;
+
+  gap:25px;
+}
+
+@media(max-width:1000px){
+
+  .cyber-layout{
+    grid-template-columns:1fr;
+  }
+
+}
+
+/* ================= NETWORK ================= */
+
+.network-box{
+  background:white;
+
+  border-radius:35px;
+
+  padding:30px;
+
+  box-shadow:0 10px 30px rgba(0,0,0,.06);
+}
+
+.network-box h2{
+  font-size:30px;
+}
+
+.network-map{
+  margin-top:24px;
+
+  height:540px;
+
+  background:
+  linear-gradient(
+    135deg,
+    #0f172a,
+    #111827
+  );
+
+  border-radius:30px;
+
+  position:relative;
+
+  overflow:hidden;
+}
+
+/* ================= GRID EFFECT ================= */
+
+.network-map::before{
+  content:"";
+
+  position:absolute;
+  inset:0;
+
+  background-image:
+  linear-gradient(rgba(255,255,255,.04) 1px, transparent 1px),
+  linear-gradient(90deg, rgba(255,255,255,.04) 1px, transparent 1px);
+
+  background-size:40px 40px;
+}
+
+/* ================= NODE ================= */
+
+.node{
+  position:absolute;
+
+  width:105px;
+  height:105px;
+
+  border-radius:28px;
+
+  background:#1e293b;
+
+  color:white;
+
+  border:3px solid #334155;
+
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+
+  gap:8px;
+
+  font-weight:700;
+
+  cursor:pointer;
+
+  transition:.3s;
+
+  z-index:2;
+}
+
+.node:hover{
+  transform:scale(1.06);
+}
+
+.node .icon{
+  font-size:36px;
+}
+
+.safe-node{
+  border-color:#22c55e;
+}
+
+.infected{
+  border-color:#ef4444;
+  animation:pulse 1s infinite;
+}
+
+.ddos{
+  border-color:#f59e0b;
+  animation:pulse2 .8s infinite;
+}
+
+.firewall-active{
+  border-color:#3b82f6;
+  box-shadow:0 0 30px rgba(59,130,246,.8);
+}
+
+/* ================= POSITION ================= */
+
+.server{
+  top:210px;
+  left:50%;
+  transform:translateX(-50%);
+}
+
+.router{
+  top:50px;
+  left:50%;
+  transform:translateX(-50%);
+}
+
+.pc1{
+  left:70px;
+  top:130px;
+}
+
+.pc2{
+  right:70px;
+  top:130px;
+}
+
+.pc3{
+  left:70px;
+  bottom:90px;
+}
+
+.pc4{
+  right:70px;
+  bottom:90px;
+}
+
+.firewall{
+  bottom:25px;
+  left:50%;
+  transform:translateX(-50%);
+}
+
+/* ================= CONNECTION ================= */
+
+.connection{
+  position:absolute;
+
+  height:4px;
+
+  background:#334155;
+
+  border-radius:999px;
+
+  overflow:hidden;
+}
+
+.connection::after{
+  content:"";
+
+  position:absolute;
+
+  width:50px;
+  height:100%;
+
+  background:#3b82f6;
+
+  box-shadow:0 0 18px #3b82f6;
+
+  animation:dataFlow 2s linear infinite;
+}
+
+/* ================= PANEL ================= */
+
+.side-panel{
+  display:flex;
+  flex-direction:column;
+  gap:25px;
+}
+
+.panel{
+  background:white;
+
+  border-radius:35px;
+
+  padding:28px;
+
+  box-shadow:0 10px 30px rgba(0,0,0,.06);
+}
+
+.panel h2{
+  font-size:28px;
+}
+
+/* ================= BUTTON ================= */
+
+.action-grid{
+  margin-top:22px;
+
+  display:grid;
+
+  grid-template-columns:1fr 1fr;
+
+  gap:15px;
+}
+
+.action-btn{
+  border:none;
+
+  padding:18px;
+
+  border-radius:18px;
+
+  color:white;
+
+  font-weight:700;
+
+  cursor:pointer;
+
+  transition:.3s;
+}
+
+.action-btn:hover{
+  transform:translateY(-5px);
+}
+
+.btn-blue{
+  background:#2563eb;
+}
+
+.btn-red{
+  background:#dc2626;
+}
+
+.btn-green{
+  background:#16a34a;
+}
+
+.btn-yellow{
+  background:#d97706;
+}
+
+/* ================= ALERT ================= */
+
+.alert-box{
+  margin-top:24px;
+
+  background:#fef2f2;
+
+  border:2px solid #ef4444;
+
+  border-radius:22px;
+
+  padding:22px;
+
+  animation:pulse 1s infinite;
+}
+
+.alert-title{
+  color:#dc2626;
+
+  font-size:22px;
+  font-weight:800;
+}
+
+.alert-box p{
+  margin-top:10px;
+  color:#7f1d1d;
+  line-height:1.8;
+}
+
+/* ================= LOG ================= */
+
+.logs{
+  margin-top:20px;
+
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+
+  max-height:360px;
+  overflow:auto;
+}
+
+.log{
+  background:#f8fafc;
+
+  padding:14px 16px;
+
+  border-radius:16px;
+
+  line-height:1.7;
+
+  font-size:14px;
+
+  border-left:4px solid #2563eb;
+}
+
+/* ================= ANIMATION ================= */
+
+@keyframes pulse{
+
+  0%{
+    box-shadow:0 0 0 rgba(239,68,68,.4);
+  }
+
+  50%{
+    box-shadow:0 0 28px rgba(239,68,68,.8);
+  }
+
+  100%{
+    box-shadow:0 0 0 rgba(239,68,68,.4);
+  }
+
+}
+
+@keyframes pulse2{
+
+  0%{
+    box-shadow:0 0 0 rgba(245,158,11,.4);
+  }
+
+  50%{
+    box-shadow:0 0 24px rgba(245,158,11,.8);
+  }
+
+  100%{
+    box-shadow:0 0 0 rgba(245,158,11,.4);
+  }
+
+}
+
+@keyframes dataFlow{
+
+  from{
+    left:-50px;
+  }
+
+  to{
+    left:100%;
+  }
+
+}
+
+/* ====================================
+RESPONSIVE UNIVERSAL
+==================================== */
+
+/* TABLET */
+
+@media(max-width:992px){
+
+.hero h1{
+font-size:36px;
+}
+
+.grid,
+.status-grid,
+.info-grid,
+.quiz-section,
+.cyber-layout{
+grid-template-columns:1fr !important;
+}
+
+}
+
+/* MOBILE */
+
+@media(max-width:768px){
+
+body{
+overflow-x:hidden;
+}
+
+/* APP */
+
+.app{
+flex-direction:column;
+}
+
+/* SIDEBAR */
+
+.sidebar{
+width:100%;
+height:auto;
+border-radius:0;
+}
+
+/* MAIN */
+
+.main{
+padding:18px;
+}
+
+/* TOPBAR */
+
+.topbar{
+flex-direction:column;
+align-items:flex-start;
+gap:15px;
+}
+
+/* HERO */
+
+.hero{
+padding:25px;
+border-radius:24px;
+}
+
+.hero h1{
+font-size:28px;
+line-height:1.4;
+}
+
+.hero p{
+font-size:14px;
+line-height:1.8;
+}
+
+/* GRID */
+
+.grid,
+.status-grid,
+.info-grid,
+.quiz-section,
+.cyber-layout,
+.stats-modern{
+grid-template-columns:1fr !important;
+}
+
+/* CARD */
+
+.card,
+.panel,
+.quiz-card,
+.status-card,
+.info-card,
+.modern-box{
+padding:22px;
+border-radius:24px;
+}
+
+/* BUTTON */
+
+.btn,
+.start-btn{
+width:100%;
+}
+
+/* QUIZ */
+
+.question{
+font-size:22px;
+}
+
+.final-score{
+font-size:58px;
+}
+
+/* NETWORK */
+
+.network-map{
+overflow:auto;
+}
+
+/* LOGIN */
+
+.login-card{
+width:100%;
+max-width:420px;
+padding:30px 24px;
+}
+
+}
+
+/* SMALL MOBILE */
+
+@media(max-width:480px){
+
+.hero h1{
+font-size:24px;
+}
+
+.question{
+font-size:20px;
+}
+
+.status-value{
+font-size:28px;
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="app">
+
+<!-- SIDEBAR -->
+
+<aside class="sidebar">
+
+<div>
+
+<div class="logo-box">
+
+<div class="logo">
+🌐
+</div>
+
+<div>
+<h2>EduSmart</h2>
+<p>Network Learning</p>
+</div>
+
+</div>
+
+<div class="nav-menu">
+
+<a href="dashboard.html" class="nav-link">
+🏠 Dashboard
+</a>
+
+<a href="materi.html" class="nav-link">
+📚 Materi
+</a>
+
+<a href="simulasi.html" class="nav-link active">
+🧩 Simulasi
+</a>
+
+<a href="kuis.html" class="nav-link">
+🎮 Kuis
+</a>
+
+</div>
+
+</div>
+
+</aside>
+
+<!-- MAIN -->
+
+<main class="main sim-page">
+
+<!-- HERO -->
+
+<div class="hero">
+
+<h1>🔐 Simulasi Cyber Security</h1>
+
+<p>
+Lindungi jaringan dari serangan virus, hacker, dan DDoS secara real-time.
+Aktifkan sistem keamanan sebelum seluruh jaringan lumpuh.
+</p>
+
+</div>
+
+<!-- STATUS -->
+
+<div class="status-grid">
+
+<div class="status-card">
+<h3>Status Jaringan</h3>
+<div class="status-value green" id="networkStatus">
+AMAN
+</div>
+</div>
+
+<div class="status-card">
+<h3>Virus Terdeteksi</h3>
+<div class="status-value red" id="virusCount">
+0
+</div>
+</div>
+
+<div class="status-card">
+<h3>Firewall</h3>
+<div class="status-value blue" id="firewallStatus">
+OFF
+</div>
+</div>
+
+<div class="status-card">
+<h3>Threat Level</h3>
+<div class="status-value yellow" id="threatLevel">
+LOW
+</div>
+</div>
+
+</div>
+
+<!-- LAYOUT -->
+
+<div class="cyber-layout">
+
+<!-- NETWORK -->
+
+<div class="network-box">
+
+<h2>🌐 Network Monitoring</h2>
+
+<div class="network-map">
+
+<!-- CONNECTION -->
+
+<div class="connection"
+style="
+width:220px;
+top:95px;
+left:50%;
+transform:translateX(-50%);
+">
+</div>
+
+<div class="connection"
+style="
+width:180px;
+top:180px;
+left:160px;
+transform:rotate(28deg);
+">
+</div>
+
+<div class="connection"
+style="
+width:180px;
+top:180px;
+right:160px;
+transform:rotate(-28deg);
+">
+</div>
+
+<div class="connection"
+style="
+width:180px;
+bottom:160px;
+left:160px;
+transform:rotate(-28deg);
+">
+</div>
+
+<div class="connection"
+style="
+width:180px;
+bottom:160px;
+right:160px;
+transform:rotate(28deg);
+">
+</div>
+
+<!-- NODES -->
+
+<div class="node router safe-node">
+<div class="icon">📡</div>
+Router
+</div>
+
+<div class="node server safe-node">
+<div class="icon">🖥️</div>
+Server
+</div>
+
+<div class="node pc1 safe-node" id="pc1">
+<div class="icon">💻</div>
+PC-01
+</div>
+
+<div class="node pc2 safe-node" id="pc2">
+<div class="icon">💻</div>
+PC-02
+</div>
+
+<div class="node pc3 safe-node" id="pc3">
+<div class="icon">💻</div>
+PC-03
+</div>
+
+<div class="node pc4 safe-node" id="pc4">
+<div class="icon">💻</div>
+PC-04
+</div>
+
+<div class="node firewall" id="firewall">
+<div class="icon">🔥</div>
+Firewall
+</div>
+
+</div>
+
+</div>
+
+<!-- PANEL -->
+
+<div class="side-panel">
+
+<div class="panel">
+
+<h2>🛡️ Security Control</h2>
+
+<div class="action-grid">
+
+<button class="action-btn btn-blue"
+onclick="activateFirewall()">
+🔥 Aktifkan Firewall
+</button>
+
+<button class="action-btn btn-red"
+onclick="scanVirus()">
+🦠 Scan Virus
+</button>
+
+<button class="action-btn btn-yellow"
+onclick="blockAttack()">
+🚫 Block Attack
+</button>
+
+<button class="action-btn btn-green"
+onclick="resetSimulation()">
+🔄 Reset
+</button>
+
+</div>
+
+<div class="alert-box">
+
+<div class="alert-title">
+⚠ LIVE ATTACK
+</div>
+
+<p id="alertText">
+Hacker sedang mencoba masuk ke jaringan...
+</p>
+
+</div>
+
+</div>
+
+<div class="panel">
+
+<h2>📜 Security Logs</h2>
+
+<div class="logs" id="logs">
+
+<div class="log">
+System initialized...
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</main>
+
+</div>
+
+<script>
+
+const logs =
+document.getElementById("logs");
+
+const firewall =
+document.getElementById("firewall");
+
+const pcs = [
+document.getElementById("pc1"),
+document.getElementById("pc2"),
+document.getElementById("pc3"),
+document.getElementById("pc4")
+];
+
+let firewallActive = false;
+let infectedCount = 0;
+let threatScore = 0;
+let currentAttack = null;
+
+/* ================= ATTACK LIST ================= */
+
+const attacks = [
+
+{
+  type:"Virus Malware",
+  className:"infected",
+  message:"☠️ Malware menginfeksi perangkat."
+},
+
+{
+  type:"DDoS Attack",
+  className:"ddos",
+  message:"🌐 Traffic berbahaya membanjiri jaringan."
+},
+
+{
+  type:"Hacker Breach",
+  className:"infected",
+  message:"🕵️ Hacker berhasil masuk ke sistem."
+},
+
+{
+  type:"Ransomware",
+  className:"infected",
+  message:"💀 File server terenkripsi ransomware."
+}
+
+];
+
+/* ================= LOG ================= */
+
+function addLog(text){
+
+  logs.innerHTML =
+  `
+  <div class="log">
+    ${text}
+  </div>
+  ` + logs.innerHTML;
+
+}
+
+/* ================= UPDATE UI ================= */
+
+function updateStatus(){
+
+  document.getElementById("virusCount")
+  .innerHTML = infectedCount;
+
+  if(infectedCount === 0){
+
+    document.getElementById("networkStatus")
+    .innerHTML = "AMAN";
+
+    document.getElementById("networkStatus")
+    .className =
+    "status-value green";
+
+    document.getElementById("threatLevel")
+    .innerHTML = "LOW";
+
+  }
+
+  else if(infectedCount <= 2){
+
+    document.getElementById("networkStatus")
+    .innerHTML = "DISERANG";
+
+    document.getElementById("networkStatus")
+    .className =
+    "status-value yellow";
+
+    document.getElementById("threatLevel")
+    .innerHTML = "MEDIUM";
+
+  }
+
+  else{
+
+    document.getElementById("networkStatus")
+    .innerHTML = "KRITIS";
+
+    document.getElementById("networkStatus")
+    .className =
+    "status-value red";
+
+    document.getElementById("threatLevel")
+    .innerHTML = "HIGH";
+
+  }
+
+}
+
+/* ================= RANDOM ATTACK ================= */
+
+function randomAttack(){
+
+  currentAttack =
+  attacks[
+    Math.floor(Math.random()*attacks.length)
+  ];
+
+  const randomPC =
+  pcs[
+    Math.floor(Math.random()*pcs.length)
+  ];
+
+  if(firewallActive){
+
+    addLog(
+      "🛡️ Firewall memblokir "
+      + currentAttack.type
+    );
+
+    return;
+  }
+
+  if(
+    !randomPC.classList.contains("infected")
+    &&
+    !randomPC.classList.contains("ddos")
+  ){
+
+    randomPC.classList.remove("safe-node");
+
+    randomPC.classList.add(
+      currentAttack.className
+    );
+
+    infectedCount++;
+
+    updateStatus();
+
+    document.getElementById("alertText")
+    .innerHTML =
+    currentAttack.type +
+    " sedang menyerang jaringan.";
+
+    addLog(currentAttack.message);
+
+    spreadAttack();
+
+  }
+
+}
+
+/* ================= SPREAD ATTACK ================= */
+
+function spreadAttack(){
+
+  if(infectedCount < 2) return;
+
+  setTimeout(() => {
+
+    const safePCs =
+    pcs.filter(pc =>
+      !pc.classList.contains("infected")
+      &&
+      !pc.classList.contains("ddos")
+    );
+
+    if(safePCs.length === 0){
+
+      gameOver();
+      return;
+
+    }
+
+    const target =
+    safePCs[
+      Math.floor(
+        Math.random()*safePCs.length
+      )
+    ];
+
+    target.classList.remove("safe-node");
+
+    target.classList.add("infected");
+
+    infectedCount++;
+
+    updateStatus();
+
+    addLog(
+      "⚠️ Virus menyebar ke perangkat lain."
+    );
+
+    if(infectedCount >= 4){
+
+      gameOver();
+
+    }
+
+  },3000);
+
+}
+
+/* ================= FIREWALL ================= */
+
+function activateFirewall(){
+
+  firewallActive = true;
+
+  firewall.classList.add("firewall-active");
+
+  document.getElementById("firewallStatus")
+  .innerHTML = "ON";
+
+  addLog("🔥 Firewall diaktifkan.");
+
+  setTimeout(() => {
+
+    firewallActive = false;
+
+    firewall.classList.remove("firewall-active");
+
+    document.getElementById("firewallStatus")
+    .innerHTML = "OFF";
+
+    addLog("⚠️ Firewall dinonaktifkan.");
+
+  },10000);
+
+}
+
+/* ================= SCAN ================= */
+
+function scanVirus(){
+
+  pcs.forEach(pc => {
+
+    pc.classList.remove("infected");
+    pc.classList.remove("ddos");
+
+    pc.classList.add("safe-node");
+
+  });
+
+  infectedCount = 0;
+
+  updateStatus();
+
+  addLog("🧪 Virus scan berhasil.");
+
+}
+
+/* ================= BLOCK ================= */
+
+function blockAttack(){
+
+  if(currentAttack){
+
+    addLog(
+      "🚫 " +
+      currentAttack.type +
+      " berhasil diblokir."
+    );
+
+  }
+
+  document.getElementById("alertText")
+  .innerHTML =
+  "Ancaman berhasil dihentikan.";
+
+}
+
+/* ================= GAME OVER ================= */
+
+function gameOver(){
+
+  document.getElementById("networkStatus")
+  .innerHTML = "DOWN";
+
+  document.getElementById("networkStatus")
+  .className =
+  "status-value red";
+
+  document.getElementById("threatLevel")
+  .innerHTML = "CRITICAL";
+
+  document.getElementById("alertText")
+  .innerHTML =
+  "💀 Seluruh jaringan lumpuh.";
+
+  addLog("💀 SYSTEM FAILURE");
+
+}
+
+/* ================= RESET ================= */
+
+function resetSimulation(){
+
+  firewallActive = false;
+
+  firewall.classList.remove("firewall-active");
+
+  document.getElementById("firewallStatus")
+  .innerHTML = "OFF";
+
+  pcs.forEach(pc => {
+
+    pc.classList.remove("infected");
+    pc.classList.remove("ddos");
+
+    pc.classList.add("safe-node");
+
+  });
+
+  infectedCount = 0;
+
+  updateStatus();
+
+  document.getElementById("alertText")
+  .innerHTML =
+  "Hacker sedang mencoba masuk ke jaringan...";
+
+  addLog("🔄 Sistem direset.");
+
+}
+
+/* ================= AUTO ATTACK ================= */
+
+setInterval(() => {
+
+  randomAttack();
+
+}, 5000);
+
+updateStatus();
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,1398 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Materi - EduSmart</title>
+
+<link rel="stylesheet" href="css/style.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+
+/* =========================
+PAGE
+========================= */
+
+.materi-page{
+  display:flex;
+  flex-direction:column;
+  gap:32px;
+}
+
+/* =========================
+HERO
+========================= */
+
+.hero-materi{
+  background:
+  linear-gradient(
+    135deg,
+    #0f172a,
+    #2563eb
+  );
+
+  border-radius:36px;
+
+  padding:55px;
+
+  color:white;
+
+  position:relative;
+  overflow:hidden;
+}
+
+.hero-materi::before{
+  content:"";
+
+  position:absolute;
+
+  width:340px;
+  height:340px;
+
+  border-radius:50%;
+
+  background:rgba(255,255,255,.08);
+
+  top:-120px;
+  right:-120px;
+}
+
+.hero-materi::after{
+  content:"";
+
+  position:absolute;
+
+  width:180px;
+  height:180px;
+
+  border-radius:50%;
+
+  background:rgba(255,255,255,.06);
+
+  bottom:-60px;
+  left:-60px;
+}
+
+.hero-materi h1{
+  font-size:48px;
+  position:relative;
+  z-index:2;
+}
+
+.hero-materi p{
+  margin-top:18px;
+
+  max-width:720px;
+
+  line-height:1.9;
+
+  opacity:.92;
+
+  position:relative;
+  z-index:2;
+}
+
+.hero-materi{
+  box-shadow:
+  0 25px 60px rgba(37,99,235,.25);
+}
+.hero-actions{
+  margin-top:30px;
+
+  display:flex;
+  gap:15px;
+
+  position:relative;
+  z-index:2;
+}
+
+.hero-outline{
+  background:rgba(255,255,255,.1);
+  border:1px solid rgba(255,255,255,.2);
+  color:white;
+}
+
+/* =========================
+PROGRESS
+========================= */
+
+.global-progress{
+  background:white;
+
+  border-radius:32px;
+
+  padding:30px;
+
+  box-shadow:var(--shadow);
+}
+
+.progress-top{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:20px;
+  flex-wrap:wrap;
+}
+
+.progress-top h2{
+  font-size:30px;
+}
+
+.progress-top p{
+  margin-top:10px;
+  color:var(--text);
+  line-height:1.8;
+}
+
+.progress-percent{
+  font-size:44px;
+  font-weight:800;
+  color:#2563eb;
+}
+
+.progress-bar{
+  margin-top:24px;
+
+  height:14px;
+
+  background:#e2e8f0;
+
+  border-radius:999px;
+
+  overflow:hidden;
+}
+
+.progress-fill{
+  width:65%;
+  height:100%;
+
+  border-radius:999px;
+
+  background:
+  linear-gradient(
+    90deg,
+    #2563eb,
+    #60a5fa
+  );
+}
+
+/* =========================
+SECTION
+========================= */
+
+.section-title{
+  margin-bottom:18px;
+}
+
+.section-title h2{
+  font-size:34px;
+  font-weight:800;
+}
+
+.section-title p{
+  margin-top:10px;
+  color:var(--text);
+  line-height:1.8;
+}
+
+/* =========================
+LEARNING PATH
+========================= */
+
+.learning-path{
+  position:relative;
+
+  display:flex;
+  flex-direction:column;
+  gap:35px;
+}
+
+.learning-path::before{
+  content:"";
+
+  position:absolute;
+
+  left:32px;
+  top:10px;
+  bottom:10px;
+
+  width:5px;
+
+  border-radius:999px;
+
+  background:#dbeafe;
+}
+
+.path-item{
+  position:relative;
+
+  display:flex;
+  gap:24px;
+}
+
+.path-number{
+  width:70px;
+  height:70px;
+
+  border-radius:24px;
+
+  background:
+  linear-gradient(
+    135deg,
+    #2563eb,
+    #60a5fa
+  );
+
+  color:white;
+
+  display:flex;
+  justify-content:center;
+  align-items:center;
+
+  font-size:26px;
+  font-weight:800;
+
+  flex-shrink:0;
+
+  z-index:2;
+}
+
+.path-content{
+  flex:1;
+}
+
+.path-header{
+  margin-bottom:20px;
+}
+
+.path-header span{
+  display:inline-flex;
+
+  padding:8px 15px;
+
+  border-radius:999px;
+
+  background:#dbeafe;
+  color:#2563eb;
+
+  font-size:12px;
+  font-weight:800;
+}
+
+.path-header h2{
+  margin-top:15px;
+  font-size:30px;
+}
+
+.path-header p{
+  margin-top:10px;
+  color:var(--text);
+  line-height:1.8;
+}
+
+/* =========================
+MATERI CARD
+========================= */
+
+.materi-grid{
+  display:grid;
+
+  grid-template-columns:
+  repeat(auto-fit,minmax(320px,1fr));
+
+  gap:22px;
+}
+
+.materi-link{
+  text-decoration:none;
+  color:inherit;
+}
+
+.materi-card{
+  background:white;
+
+  border-radius:32px;
+
+  padding:28px;
+
+  box-shadow:var(--shadow);
+
+  transition:.3s;
+
+  position:relative;
+
+  overflow:hidden;
+
+  height:100%;
+}
+
+.materi-card:hover{
+  transform:translateY(-8px);
+}
+
+.materi-card::before{
+  content:"";
+
+  position:absolute;
+
+  width:120px;
+  height:120px;
+
+  border-radius:50%;
+
+  background:#eff6ff;
+
+  top:-40px;
+  right:-40px;
+}
+
+.materi-icon{
+  width:78px;
+  height:78px;
+
+  border-radius:24px;
+
+  display:flex;
+  justify-content:center;
+  align-items:center;
+
+  font-size:34px;
+
+  position:relative;
+  z-index:2;
+}
+
+.blue{
+  background:#dbeafe;
+}
+
+.yellow{
+  background:#fef3c7;
+}
+
+.green{
+  background:#dcfce7;
+}
+
+.red{
+  background:#fee2e2;
+}
+
+.materi-card h3{
+  margin-top:20px;
+
+  font-size:25px;
+
+  position:relative;
+  z-index:2;
+}
+
+.materi-card p{
+  margin-top:14px;
+
+  color:var(--text);
+
+  line-height:1.8;
+
+  position:relative;
+  z-index:2;
+}
+
+.materi-info{
+  margin-top:20px;
+
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+}
+
+.materi-badge{
+  padding:8px 14px;
+
+  border-radius:999px;
+
+  background:#eff6ff;
+  color:#2563eb;
+
+  font-size:13px;
+  font-weight:700;
+}
+
+.materi-list{
+  margin-top:22px;
+
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+}
+
+.materi-item{
+  background:#f8fafc;
+
+  padding:14px 16px;
+
+  border-radius:16px;
+
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+
+  font-size:14px;
+  font-weight:600;
+}
+
+.materi-card:hover .materi-icon{
+  transform:scale(1.08) rotate(-5deg);
+}
+
+.materi-icon{
+  transition:.3s;
+}
+
+.status{
+  font-size:12px;
+  font-weight:800;
+
+  padding:6px 12px;
+
+  border-radius:999px;
+}
+
+.done{
+  background:#dcfce7;
+  color:#16a34a;
+}
+
+.open{
+  background:#dbeafe;
+  color:#2563eb;
+}
+
+.locked{
+  background:#fee2e2;
+  color:#dc2626;
+}
+
+.locked-card{
+  pointer-events:none;
+  opacity:.5;
+  filter:grayscale(1);
+}
+
+.locked-card .materi-card{
+  cursor:not-allowed;
+}
+
+/* =========================
+VIDEO
+========================= */
+
+.video-box{
+  margin-top:22px;
+
+  border-radius:20px;
+
+  overflow:hidden;
+}
+
+.video-box iframe{
+  width:100%;
+  height:220px;
+}
+
+/* =========================
+TIPS
+========================= */
+
+.tips-box{
+  background:
+  linear-gradient(
+    135deg,
+    #2563eb,
+    #38bdf8
+  );
+
+  border-radius:35px;
+
+  padding:40px;
+
+  color:white;
+
+  position:relative;
+  overflow:hidden;
+}
+
+.tips-box::before{
+  content:"";
+
+  position:absolute;
+
+  width:250px;
+  height:250px;
+
+  border-radius:50%;
+
+  background:rgba(255,255,255,.1);
+
+  top:-80px;
+  right:-80px;
+}
+
+.tips-box h2,
+.tips-box p,
+.tips-box ul{
+  position:relative;
+  z-index:2;
+}
+
+.tips-box p{
+  margin-top:14px;
+  line-height:1.8;
+  opacity:.92;
+}
+
+.tips-box ul{
+  margin-top:22px;
+  padding-left:20px;
+  line-height:2;
+}
+
+/* =========================
+RESPONSIVE
+========================= */
+
+@media(max-width:768px){
+
+  .hero-materi{
+    padding:35px;
+  }
+
+  .hero-materi h1{
+    font-size:36px;
+  }
+
+  .hero-actions{
+    flex-direction:column;
+  }
+
+  .learning-path::before{
+    display:none;
+  }
+
+  .path-item{
+    flex-direction:column;
+  }
+
+  
+
+}
+
+.mobile-topbar{
+  display:none;
+}
+
+@media(max-width:900px){
+
+  .mobile-topbar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    background:white;
+    padding:18px 20px;
+
+    position:sticky;
+    top:0;
+    z-index:999;
+
+    box-shadow:0 5px 20px rgba(0,0,0,.05);
+  }
+
+}
+
+/* ====================================
+RESPONSIVE UNIVERSAL
+==================================== */
+
+/* TABLET */
+
+@media(max-width:992px){
+
+.hero h1{
+font-size:36px;
+}
+
+.grid,
+.status-grid,
+.info-grid,
+.quiz-section,
+.cyber-layout{
+grid-template-columns:1fr !important;
+}
+
+}
+
+/* MOBILE */
+
+@media(max-width:768px){
+
+body{
+overflow-x:hidden;
+}
+
+/* APP */
+
+.app{
+flex-direction:column;
+}
+
+/* SIDEBAR */
+
+.sidebar{
+width:100%;
+height:auto;
+border-radius:0;
+}
+
+/* MAIN */
+
+.main{
+padding:18px;
+}
+
+/* TOPBAR */
+
+.topbar{
+flex-direction:column;
+align-items:flex-start;
+gap:15px;
+}
+
+/* HERO */
+
+.hero{
+padding:25px;
+border-radius:24px;
+}
+
+.hero h1{
+font-size:28px;
+line-height:1.4;
+}
+
+.hero p{
+font-size:14px;
+line-height:1.8;
+}
+
+/* GRID */
+
+.grid,
+.status-grid,
+.info-grid,
+.quiz-section,
+.cyber-layout,
+.stats-modern{
+grid-template-columns:1fr !important;
+}
+
+/* CARD */
+
+.card,
+.panel,
+.quiz-card,
+.status-card,
+.info-card,
+.modern-box{
+padding:22px;
+border-radius:24px;
+}
+
+/* BUTTON */
+
+.btn,
+.start-btn{
+width:100%;
+}
+
+/* QUIZ */
+
+.question{
+font-size:22px;
+}
+
+.final-score{
+font-size:58px;
+}
+
+/* NETWORK */
+
+.network-map{
+overflow:auto;
+}
+
+/* LOGIN */
+
+.login-card{
+width:100%;
+max-width:420px;
+padding:30px 24px;
+}
+
+}
+
+/* SMALL MOBILE */
+
+@media(max-width:480px){
+
+.hero h1{
+font-size:24px;
+}
+
+.question{
+font-size:20px;
+}
+
+.status-value{
+font-size:28px;
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="app">
+
+<!-- SIDEBAR -->
+
+<aside class="sidebar">
+
+<div>
+
+<div class="logo-box">
+
+<div class="logo">
+🌐
+</div>
+
+<div>
+<h2>EduSmart</h2>
+<p>Network Learning</p>
+</div>
+
+</div>
+
+<div class="nav-menu">
+
+<a href="dashboard.html" class="nav-link">
+🏠 Dashboard
+</a>
+
+<a href="materi.html" class="nav-link active">
+📚 Materi
+</a>
+
+<a href="simulasi.html" class="nav-link">
+🧩 Simulasi
+</a>
+
+<a href="kuis.html" class="nav-link">
+🎮 Kuis
+</a>
+
+</div>
+
+</div>
+
+</aside>
+
+<!-- MAIN -->
+
+<main class="main materi-page">
+
+<!-- HERO -->
+
+<div class="hero-materi">
+
+<h1>📚 Materi Jaringan Komputer</h1>
+
+<p>
+Belajar networking modern mulai dari dasar,
+perangkat jaringan,
+IP Address,
+hingga cyber security dengan sistem learning path interaktif.
+</p>
+
+<div class="hero-actions">
+
+<button class="btn hero-btn">
+Mulai Belajar
+</button>
+
+
+
+</div>
+
+</div>
+
+<!-- PROGRESS -->
+
+<div class="global-progress">
+
+<div class="progress-top">
+
+<div>
+
+<h2>📈 Progress Belajar</h2>
+
+<p>
+Kamu sudah menyelesaikan beberapa materi networking dasar dan sedang melanjutkan ke level berikutnya.
+</p>
+
+</div>
+
+<div class="progress-percent">
+65%
+</div>
+
+</div>
+
+<div class="progress-bar">
+<div class="progress-fill"></div>
+</div>
+
+</div>
+
+<!-- LEARNING PATH -->
+
+<div>
+
+<div class="section-title">
+
+<h2>🚀 Learning Path</h2>
+
+<p>
+Ikuti alur pembelajaran networking secara bertahap dari level dasar hingga keamanan jaringan modern.
+</p>
+
+</div>
+
+<div class="learning-path">
+
+<!-- LEVEL 1 -->
+
+<div class="path-item">
+
+<div class="path-number">
+1
+</div>
+
+<div class="path-content">
+
+<div class="path-header">
+
+<span>LEVEL 1</span>
+
+<h2>Dasar Topologi Jaringan</h2>
+
+<p>
+Pelajari struktur dasar hubungan antar perangkat jaringan komputer.
+</p>
+
+</div>
+
+<div class="materi-grid">
+
+<a href="topologi.html" class="materi-link">
+
+<div class="materi-card">
+
+<div class="materi-icon blue">
+🌐
+</div>
+
+<h3>Topologi Jaringan</h3>
+
+<p>
+Belajar topologi star, bus, ring, mesh, dan hybrid.
+</p>
+
+<div class="materi-info">
+
+<div class="materi-badge">
+6 Materi
+</div>
+
+<div class="materi-badge">
+Beginner
+</div>
+
+</div>
+
+<div class="materi-list">
+
+<div class="materi-item">
+Topologi Star
+<span class="status done">DONE</span>
+</div>
+
+<div class="materi-item">
+Topologi Bus
+<span class="status open">OPEN</span>
+</div>
+
+<div class="materi-item">
+Topologi Ring
+<span class="status locked">LOCKED</span>
+</div>
+
+</div>
+
+<div class="video-box">
+
+<iframe
+src="https://www.youtube.com/embed/qiQR5rTSshw"
+frameborder="0"
+allowfullscreen>
+</iframe>
+
+</div>
+
+</div>
+
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- LEVEL 2 -->
+
+<div class="path-item">
+
+<div class="path-number">
+2
+</div>
+
+<div class="path-content">
+
+<div class="path-header">
+
+<span>LEVEL 2</span>
+
+<h2>Perangkat Networking</h2>
+
+<p>
+Kenali perangkat penting yang digunakan dalam jaringan komputer modern.
+</p>
+
+</div>
+
+<div class="materi-grid">
+
+<a href="perangkat.html"
+class="materi-link locked-card"
+id="perangkat-card">
+
+<div class="materi-card">
+
+<div class="materi-icon yellow">
+📡
+</div>
+
+<h3>Perangkat Jaringan</h3>
+
+<p>
+Pelajari fungsi router, switch, modem, hub, dan access point.
+</p>
+
+<div class="materi-info">
+
+<div class="materi-badge">
+5 Materi
+</div>
+
+<div class="materi-badge">
+Intermediate
+</div>
+
+</div>
+
+<div class="materi-list">
+
+<div class="materi-item">
+Router
+<span class="status done">DONE</span>
+</div>
+
+<div class="materi-item">
+Switch
+<span class="status open">OPEN</span>
+</div>
+
+<div class="materi-item">
+Access Point
+<span class="status locked">LOCKED</span>
+</div>
+
+</div>
+
+<div class="video-box">
+
+<iframe
+src="https://www.youtube.com/embed/VwN91x5i25g"
+frameborder="0"
+allowfullscreen>
+</iframe>
+
+</div>
+
+</div>
+
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+```html
+<!-- LEVEL 3 -->
+
+<div class="path-item">
+
+  <div class="path-number">
+    3
+  </div>
+
+  <div class="path-content">
+
+    <div class="path-header">
+
+      <span>LEVEL 3</span>
+
+      <h2>IP Address & Subnetting</h2>
+
+      <p>
+        Memahami sistem pengalamatan IP dan subnetting jaringan komputer.
+      </p>
+
+    </div>
+
+    <div class="materi-grid">
+
+      <a href="ip.html"
+        class="materi-link locked-card"
+        id="ip-card">
+
+        <div class="materi-card">
+
+          <div class="materi-icon green">
+            💻
+          </div>
+
+          <h3>IP Address</h3>
+
+          <p>
+            Belajar IPv4, subnet mask, gateway, dan subnetting dasar.
+          </p>
+
+          <div class="materi-info">
+
+            <div class="materi-badge">
+              4 Materi
+            </div>
+
+            <div class="materi-badge">
+              Intermediate
+            </div>
+
+          </div>
+
+          <div class="materi-list">
+
+            <div class="materi-item">
+              IPv4
+              <span class="status done">DONE</span>
+            </div>
+
+            <div class="materi-item">
+              Subnetting
+              <span class="status open" id="ip-status">
+              OPEN
+              </span>
+            </div>
+
+            <div class="materi-item">
+              Gateway
+              <span class="status locked">LOCKED</span>
+            </div>
+
+          </div>
+
+          <div class="video-box">
+
+            <iframe
+              src="https://www.youtube.com/embed/bj-Yfakjllc"
+              frameborder="0"
+              allowfullscreen>
+            </iframe>
+
+          </div>
+
+        </div>
+
+      </a>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+
+<!-- LEVEL 4 -->
+
+<div class="path-item">
+
+  <div class="path-number">
+    4
+  </div>
+
+  <div class="path-content">
+
+    <div class="path-header">
+
+      <span>LEVEL 4</span>
+
+      <h2>Cyber Security</h2>
+
+      <p>
+        Pelajari keamanan jaringan dan perlindungan data digital modern.
+      </p>
+
+    </div>
+
+    <div class="materi-grid">
+
+      <a href="keamanan.html"
+      class="materi-link locked-card"
+      id="security-card">
+
+        <div class="materi-card">
+
+          <div class="materi-icon red">
+            🔐
+          </div>
+
+          <h3>Keamanan Jaringan</h3>
+
+          <p>
+            Belajar firewall, antivirus, enkripsi, dan authentication.
+          </p>
+
+          <div class="materi-info">
+
+            <div class="materi-badge">
+              7 Materi
+            </div>
+
+            <div class="materi-badge">
+              Advanced
+            </div>
+
+          </div>
+
+          <div class="materi-list">
+
+            <div class="materi-item">
+              Firewall
+              <span class="status locked">
+                LOCKED
+              </span>
+            </div>
+
+            <div class="materi-item">
+              Enkripsi
+              <span class="status locked">
+                LOCKED
+              </span>
+            </div>
+
+            <div class="materi-item">
+              Authentication
+              <span class="status locked">
+                LOCKED
+              </span>
+            </div>
+
+          </div>
+
+          <div class="video-box">
+
+            <iframe
+            src="https://www.youtube.com/embed/VwN91x5i25g"
+            frameborder="0"
+            allowfullscreen>
+            </iframe>
+
+          </div>
+
+        </div>
+
+      </a>
+
+    </div>
+
+  </div>
+
+</div>
+
+<!-- TIPS -->
+
+<div class="tips-box">
+
+<h2>🚀 Tips Belajar Networking</h2>
+
+<p>
+Belajar networking akan lebih mudah jika dilakukan secara bertahap dan diikuti praktik langsung.
+</p>
+
+<ul>
+<li>Pelajari konsep dasar terlebih dahulu</li>
+<li>Pahami fungsi setiap perangkat jaringan</li>
+<li>Coba simulasi menggunakan Packet Tracer</li>
+<li>Latihan kuis dan evaluasi secara rutin</li>
+<li>Praktik konfigurasi sederhana di laboratorium</li>
+</ul>
+
+</div>
+
+<div class="mobile-topbar">
+
+<div class="mobile-logo">
+🌐 EduSmart
+</div>
+
+<div class="mobile-menu" onclick="toggleSidebar()">
+☰
+</div>
+
+</div>
+
+</main>
+
+</div>
+
+<script src="js/app.js"></script>
+
+<script>
+
+/* =========================
+AMBIL DATA PROGRESS
+========================= */
+
+const topologiDone =
+localStorage.getItem("topologiDone");
+
+const perangkatDone =
+localStorage.getItem("perangkatDone");
+
+const ipDone =
+localStorage.getItem("ipDone");
+
+/* =========================
+AMBIL ELEMENT
+========================= */
+
+const perangkatCard =
+document.getElementById("perangkat-card");
+
+const ipCard =
+document.getElementById("ip-card");
+
+const securityCard =
+document.getElementById("security-card");
+
+const progressFill =
+document.querySelector(".progress-fill");
+
+const progressPercent =
+document.querySelector(".progress-percent");
+
+/* =========================
+STATUS PROGRESS
+========================= */
+
+let totalProgress = 25;
+
+/* =========================
+LEVEL 2 UNLOCK
+Jika Topologi selesai
+========================= */
+
+if(topologiDone === "true"){
+
+  perangkatCard.classList.remove("locked-card");
+
+  totalProgress = 45;
+
+}
+
+/* =========================
+LEVEL 3 UNLOCK
+Jika Perangkat selesai
+========================= */
+
+if(perangkatDone === "true"){
+
+  ipCard.classList.remove("locked-card");
+
+  totalProgress = 65;
+
+}
+
+/* =========================
+LEVEL 4 UNLOCK
+Jika IP selesai
+========================= */
+
+if(ipDone === "true"){
+
+  securityCard.classList.remove("locked-card");
+
+  totalProgress = 85;
+
+}
+
+/* =========================
+UPDATE UI PROGRESS
+========================= */
+
+progressFill.style.width =
+totalProgress + "%";
+
+progressPercent.innerHTML =
+totalProgress + "%";
+
+</script>
+
+</body>
+</html>
+</script>
+
+</body>
+</html>
+

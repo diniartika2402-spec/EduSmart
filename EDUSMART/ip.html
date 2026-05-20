@@ -1,0 +1,1429 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+<title>IP Address & Subnetting - EduSmart</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  font-family:'Plus Jakarta Sans',sans-serif;
+  background:#f1f5f9;
+  color:#0f172a;
+}
+
+/* SCROLLBAR */
+
+::-webkit-scrollbar{
+  width:10px;
+}
+
+::-webkit-scrollbar-thumb{
+  background:#cbd5e1;
+  border-radius:999px;
+}
+
+/* APP */
+
+.app{
+  display:flex;
+  min-height:100vh;
+}
+
+/* SIDEBAR */
+
+.sidebar{
+  width:280px;
+  background:#0f172a;
+  color:white;
+  padding:30px 22px;
+  position:fixed;
+  top:0;
+  left:0;
+  height:100vh;
+  overflow-y:auto;
+  z-index:1000;
+}
+
+.logo-box{
+  display:flex;
+  align-items:center;
+  gap:14px;
+  margin-bottom:45px;
+}
+
+.logo{
+  width:64px;
+  height:64px;
+  border-radius:22px;
+
+  background:linear-gradient(
+    135deg,
+    #2563eb,
+    #60a5fa
+  );
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  font-size:30px;
+
+  box-shadow:0 10px 25px rgba(37,99,235,.35);
+}
+
+.logo-box h2{
+  font-size:24px;
+  font-weight:800;
+}
+
+.logo-box p{
+  margin-top:4px;
+  font-size:13px;
+  opacity:.7;
+}
+
+.nav-menu{
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+}
+
+.nav-link{
+  text-decoration:none;
+  color:#cbd5e1;
+
+  padding:16px 18px;
+
+  border-radius:18px;
+
+  transition:.3s;
+
+  font-weight:700;
+
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+.nav-link:hover{
+  background:#1e293b;
+  color:white;
+  transform:translateX(4px);
+}
+
+.nav-link.active{
+  background:linear-gradient(
+    135deg,
+    #2563eb,
+    #60a5fa
+  );
+
+  color:white;
+
+  box-shadow:0 10px 25px rgba(37,99,235,.35);
+}
+
+/* MAIN */
+
+.main{
+  margin-left:280px;
+  width:calc(100% - 280px);
+  padding:35px;
+
+  display:flex;
+  flex-direction:column;
+  gap:30px;
+}
+
+/* HERO */
+
+.hero{
+  position:relative;
+  overflow:hidden;
+
+  padding:60px;
+
+  border-radius:40px;
+
+  color:white;
+
+  background:linear-gradient(
+    135deg,
+    #0f172a,
+    #1d4ed8,
+    #38bdf8
+  );
+}
+
+.hero::before{
+  content:"";
+
+  position:absolute;
+
+  width:340px;
+  height:340px;
+
+  border-radius:50%;
+
+  background:rgba(255,255,255,.08);
+
+  top:-120px;
+  right:-120px;
+}
+
+.hero::after{
+  content:"";
+
+  position:absolute;
+
+  width:240px;
+  height:240px;
+
+  border-radius:50%;
+
+  background:rgba(255,255,255,.05);
+
+  bottom:-90px;
+  left:-90px;
+}
+
+.hero-content{
+  position:relative;
+  z-index:2;
+}
+
+.hero h1{
+  font-size:54px;
+  line-height:1.2;
+  font-weight:800;
+}
+
+.hero p{
+  margin-top:18px;
+
+  max-width:760px;
+
+  line-height:1.9;
+
+  color:rgba(255,255,255,.88);
+}
+
+.hero-info{
+  margin-top:30px;
+
+  display:flex;
+  gap:14px;
+  flex-wrap:wrap;
+}
+
+.hero-badge{
+  padding:11px 18px;
+
+  border-radius:999px;
+
+  background:rgba(255,255,255,.12);
+
+  border:1px solid rgba(255,255,255,.18);
+
+  backdrop-filter:blur(10px);
+
+  font-size:14px;
+  font-weight:700;
+}
+
+.hero-buttons{
+  margin-top:35px;
+
+  display:flex;
+  gap:16px;
+  flex-wrap:wrap;
+}
+
+.btn{
+  padding:15px 24px;
+
+  border-radius:18px;
+
+  font-weight:700;
+
+  text-decoration:none;
+
+  transition:.3s;
+}
+
+.btn:hover{
+  transform:translateY(-4px);
+}
+
+.btn-primary{
+  background:white;
+  color:#2563eb;
+}
+
+.btn-outline{
+  border:1px solid rgba(255,255,255,.2);
+  background:rgba(255,255,255,.08);
+  color:white;
+}
+
+/* SECTION TITLE */
+
+.section-title h2{
+  font-size:34px;
+  font-weight:800;
+}
+
+.section-title p{
+  margin-top:10px;
+  color:#64748b;
+  line-height:1.8;
+}
+
+/* LAYOUT */
+
+.learning-layout{
+  display:grid;
+  grid-template-columns:340px 1fr;
+  gap:28px;
+  align-items:start;
+}
+
+/* CARD LIST */
+
+.card-list{
+  display:flex;
+  flex-direction:column;
+  gap:20px;
+  position:sticky;
+  top:20px;
+}
+
+.card{
+  position:relative;
+  overflow:hidden;
+
+  background:white;
+
+  border-radius:30px;
+
+  padding:24px;
+
+  border:2px solid transparent;
+
+  box-shadow:0 10px 30px rgba(15,23,42,.06);
+
+  transition:.3s;
+
+  cursor:pointer;
+}
+
+.card:hover{
+  transform:translateY(-6px);
+}
+
+.card.active{
+  border:2px solid #2563eb;
+  background:#eff6ff;
+}
+
+.card::before{
+  content:"";
+
+  position:absolute;
+
+  width:120px;
+  height:120px;
+
+  border-radius:50%;
+
+  top:-45px;
+  right:-45px;
+
+  background:#f8fafc;
+}
+
+.icon{
+  width:74px;
+  height:74px;
+
+  border-radius:24px;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  font-size:32px;
+
+  position:relative;
+  z-index:2;
+}
+
+.blue{
+  background:#dbeafe;
+}
+
+.green{
+  background:#dcfce7;
+}
+
+.yellow{
+  background:#fef3c7;
+}
+
+.card h3{
+  margin-top:18px;
+  font-size:25px;
+  font-weight:800;
+}
+
+.card p{
+  margin-top:12px;
+  color:#64748b;
+  line-height:1.8;
+}
+
+.card-tag{
+  margin-top:18px;
+
+  display:inline-flex;
+
+  padding:9px 16px;
+
+  border-radius:999px;
+
+  background:white;
+
+  color:#2563eb;
+
+  font-size:13px;
+  font-weight:700;
+}
+
+/* DETAIL */
+
+.detail-wrapper{
+  width:100%;
+}
+
+.detail-box{
+  display:none;
+
+  background:white;
+
+  border-radius:35px;
+
+  padding:38px;
+
+  box-shadow:0 10px 30px rgba(15,23,42,.06);
+
+  animation:fade .35s ease;
+}
+
+.detail-box.active{
+  display:block;
+}
+
+@keyframes fade{
+  from{
+    opacity:0;
+    transform:translateY(15px);
+  }
+
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+.detail-header{
+  display:flex;
+  align-items:center;
+  gap:20px;
+
+  padding-bottom:25px;
+
+  border-bottom:1px solid #e2e8f0;
+}
+
+.detail-icon{
+  width:90px;
+  height:90px;
+
+  border-radius:28px;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  font-size:38px;
+}
+
+.detail-title h2{
+  font-size:36px;
+  font-weight:800;
+}
+
+.detail-title p{
+  margin-top:8px;
+  color:#64748b;
+}
+
+.detail-content{
+  margin-top:30px;
+}
+
+.detail-content h3{
+  font-size:28px;
+  margin-bottom:18px;
+}
+
+.detail-content p{
+  color:#475569;
+  line-height:2;
+  margin-bottom:18px;
+}
+
+.detail-content ul{
+  margin:20px 0;
+  padding-left:24px;
+
+  color:#334155;
+  line-height:2;
+}
+
+.highlight-box{
+  margin-top:28px;
+
+  background:linear-gradient(
+    135deg,
+    #eff6ff,
+    #f8fafc
+  );
+
+  border-left:5px solid #2563eb;
+
+  padding:24px;
+
+  border-radius:24px;
+}
+
+.highlight-box h4{
+  font-size:20px;
+  margin-bottom:12px;
+}
+
+/* TABLE */
+
+.table-box{
+  overflow:auto;
+
+  background:white;
+
+  border-radius:30px;
+
+  padding:25px;
+
+  box-shadow:0 10px 30px rgba(15,23,42,.06);
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+}
+
+th{
+  background:#2563eb;
+  color:white;
+}
+
+th,td{
+  padding:18px;
+  text-align:left;
+}
+
+tr:nth-child(even){
+  background:#f8fafc;
+}
+
+/* VIDEO */
+
+.video-box{
+  overflow:hidden;
+
+  border-radius:30px;
+
+  background:white;
+
+  padding:20px;
+
+  box-shadow:0 10px 30px rgba(15,23,42,.06);
+}
+
+.video-box iframe{
+  width:100%;
+  height:500px;
+  border:none;
+  border-radius:22px;
+}
+
+/* TIPS */
+
+.tips{
+  position:relative;
+  overflow:hidden;
+
+  padding:45px;
+
+  border-radius:35px;
+
+  color:white;
+
+  background:linear-gradient(
+    135deg,
+    #2563eb,
+    #38bdf8
+  );
+}
+
+.tips::before{
+  content:"";
+
+  position:absolute;
+
+  width:260px;
+  height:260px;
+
+  border-radius:50%;
+
+  background:rgba(255,255,255,.08);
+
+  top:-90px;
+  right:-90px;
+}
+
+.tips-content{
+  position:relative;
+  z-index:2;
+}
+
+.tips h2{
+  font-size:34px;
+}
+
+.tips p{
+  margin-top:16px;
+  line-height:1.9;
+}
+
+.tips ul{
+  margin-top:25px;
+  padding-left:24px;
+  line-height:2.1;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:1100px){
+
+  .learning-layout{
+    grid-template-columns:1fr;
+  }
+
+  .card-list{
+    position:relative;
+    top:0;
+  }
+
+}
+
+@media(max-width:900px){
+
+  .sidebar{
+    display:none;
+  }
+
+  .main{
+    margin-left:0;
+    width:100%;
+    padding:20px;
+  }
+
+  .hero{
+    padding:38px;
+  }
+
+  .hero h1{
+    font-size:38px;
+  }
+
+  .detail-header{
+    flex-direction:column;
+    align-items:flex-start;
+  }
+
+  .video-box iframe{
+    height:250px;
+  }
+
+}
+
+.finish-box{
+  background:white;
+  padding:35px;
+  border-radius:30px;
+  box-shadow:0 10px 30px rgba(0,0,0,.06);
+  text-align:center;
+}
+
+.finish-box h2{
+  font-size:32px;
+}
+
+.finish-box p{
+  margin-top:14px;
+  color:#64748b;
+  line-height:1.8;
+}
+
+.finish-btn{
+  margin-top:24px;
+  border:none;
+  padding:18px 28px;
+  border-radius:18px;
+  background:linear-gradient(
+    135deg,
+    #2563eb,
+    #60a5fa
+  );
+  color:white;
+  font-size:16px;
+  font-weight:700;
+  cursor:pointer;
+  transition:.3s;
+}
+
+.finish-btn:hover{
+  transform:translateY(-4px);
+}
+
+.quiz-btn{
+  display:inline-flex;
+  justify-content:center;
+  align-items:center;
+
+  margin-top:16px;
+
+  padding:18px 28px;
+
+  border-radius:18px;
+
+  background:linear-gradient(
+    135deg,
+    #f59e0b,
+    #fbbf24
+  );
+
+  color:white;
+  text-decoration:none;
+
+  font-size:16px;
+  font-weight:700;
+
+  transition:.3s;
+}
+
+.quiz-btn:hover{
+  transform:translateY(-4px);
+}
+
+/* ====================================
+RESPONSIVE UNIVERSAL
+==================================== */
+
+/* TABLET */
+
+@media(max-width:992px){
+
+.hero h1{
+font-size:36px;
+}
+
+.grid,
+.status-grid,
+.info-grid,
+.quiz-section,
+.cyber-layout{
+grid-template-columns:1fr !important;
+}
+
+}
+
+/* MOBILE */
+
+@media(max-width:768px){
+
+body{
+overflow-x:hidden;
+}
+
+/* APP */
+
+.app{
+flex-direction:column;
+}
+
+/* SIDEBAR */
+
+.sidebar{
+width:100%;
+height:auto;
+border-radius:0;
+}
+
+/* MAIN */
+
+.main{
+padding:18px;
+}
+
+/* TOPBAR */
+
+.topbar{
+flex-direction:column;
+align-items:flex-start;
+gap:15px;
+}
+
+/* HERO */
+
+.hero{
+padding:25px;
+border-radius:24px;
+}
+
+.hero h1{
+font-size:28px;
+line-height:1.4;
+}
+
+.hero p{
+font-size:14px;
+line-height:1.8;
+}
+
+/* GRID */
+
+.grid,
+.status-grid,
+.info-grid,
+.quiz-section,
+.cyber-layout,
+.stats-modern{
+grid-template-columns:1fr !important;
+}
+
+/* CARD */
+
+.card,
+.panel,
+.quiz-card,
+.status-card,
+.info-card,
+.modern-box{
+padding:22px;
+border-radius:24px;
+}
+
+/* BUTTON */
+
+.btn,
+.start-btn{
+width:100%;
+}
+
+/* QUIZ */
+
+.question{
+font-size:22px;
+}
+
+.final-score{
+font-size:58px;
+}
+
+/* NETWORK */
+
+.network-map{
+overflow:auto;
+}
+
+/* LOGIN */
+
+.login-card{
+width:100%;
+max-width:420px;
+padding:30px 24px;
+}
+
+}
+
+/* SMALL MOBILE */
+
+@media(max-width:480px){
+
+.hero h1{
+font-size:24px;
+}
+
+.question{
+font-size:20px;
+}
+
+.status-value{
+font-size:28px;
+}
+
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+<!-- SIDEBAR -->
+
+<aside class="sidebar">
+
+<div class="logo-box">
+
+<div class="logo">
+🌐
+</div>
+
+<div>
+<h2>EduSmart</h2>
+<p>Network Learning</p>
+</div>
+
+</div>
+
+<div class="nav-menu">
+
+<a href="dashboard.html" class="nav-link">
+🏠 Dashboard
+</a>
+
+<a href="materi.html" class="nav-link active">
+📚 Materi
+</a>
+
+<a href="simulasi.html" class="nav-link">
+🧩 Simulasi
+</a>
+
+<a href="kuis.html" class="nav-link">
+🎮 Kuis
+</a>
+
+</div>
+
+</aside>
+
+<!-- MAIN -->
+
+<main class="main">
+
+<!-- HERO -->
+
+<section class="hero">
+
+<div class="hero-content">
+
+<h1>💻 IP Address & Subnetting</h1>
+
+<p>
+Pelajari konsep pengalamatan jaringan komputer mulai dari IPv4, subnetting, hingga gateway secara modern, interaktif, dan mudah dipahami.
+</p>
+
+<div class="hero-info">
+
+<div class="hero-badge">
+📘 3 Materi Utama
+</div>
+
+<div class="hero-badge">
+⚡ Intermediate Level
+</div>
+
+<div class="hero-badge">
+🧩 Simulasi Networking
+</div>
+
+</div>
+
+<div class="hero-buttons">
+
+<a href="materi.html" class="btn btn-primary">
+← Kembali ke Materi
+</a>
+
+<a href="kuis.html" class="btn btn-outline">
+Lanjut Kuis →
+</a>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- SECTION -->
+
+<div class="section-title">
+
+<h2>📚 Materi Pembelajaran</h2>
+
+<p>
+Klik materi di sebelah kiri untuk melihat isi pembelajaran secara interaktif.
+</p>
+
+</div>
+
+<!-- LAYOUT -->
+
+<div class="learning-layout">
+
+<!-- CARD LIST -->
+
+<div class="card-list">
+
+<div class="card active" data-target="ipv4">
+
+<div class="icon blue">
+🌐
+</div>
+
+<h3>IPv4</h3>
+
+<p>
+Pengenalan dasar alamat IP dan struktur pengalamatan jaringan komputer.
+</p>
+
+<div class="card-tag">
+Dasar Networking
+</div>
+
+</div>
+
+<div class="card" data-target="subnetting">
+
+<div class="icon green">
+📡
+</div>
+
+<h3>Subnetting</h3>
+
+<p>
+Teknik membagi jaringan menjadi subnet kecil agar lebih efisien.
+</p>
+
+<div class="card-tag">
+Intermediate
+</div>
+
+</div>
+
+<div class="card" data-target="gateway">
+
+<div class="icon yellow">
+🔗
+</div>
+
+<h3>Gateway</h3>
+
+<p>
+Penghubung antar jaringan lokal menuju internet.
+</p>
+
+<div class="card-tag">
+Routing Dasar
+</div>
+
+</div>
+
+</div>
+
+<!-- DETAIL -->
+
+<div class="detail-wrapper">
+
+<!-- IPV4 -->
+
+<div id="ipv4" class="detail-box active">
+
+<div class="detail-header">
+
+<div class="detail-icon blue">
+🌐
+</div>
+
+<div class="detail-title">
+<h2>Materi IPv4</h2>
+<p>Pengenalan alamat IP versi 4 dalam jaringan komputer</p>
+</div>
+
+</div>
+
+<div class="detail-content">
+
+<h3>📘 Pengertian IPv4</h3>
+
+<p>
+IPv4 atau Internet Protocol Version 4 adalah sistem pengalamatan yang digunakan untuk memberikan identitas unik kepada setiap perangkat di jaringan komputer.
+</p>
+
+<p>
+IPv4 terdiri dari 32-bit yang dibagi menjadi empat oktet dengan format seperti:
+<b>192.168.1.1</b>
+</p>
+
+<p>
+IP Address memungkinkan perangkat saling berkomunikasi dan bertukar data melalui jaringan.
+</p>
+
+<ul>
+<li><b>Network ID</b> → menunjukkan alamat jaringan</li>
+<li><b>Host ID</b> → menunjukkan perangkat dalam jaringan</li>
+<li><b>Public IP</b> → digunakan untuk internet global</li>
+<li><b>Private IP</b> → digunakan dalam jaringan lokal</li>
+</ul>
+
+<div class="highlight-box">
+
+<h4>💡 Contoh IPv4</h4>
+
+<p>
+Saat laptop terhubung ke WiFi sekolah, perangkat akan memperoleh IP seperti
+<b>192.168.10.5</b>.
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- SUBNETTING -->
+
+<div id="subnetting" class="detail-box">
+
+<div class="detail-header">
+
+<div class="detail-icon green">
+📡
+</div>
+
+<div class="detail-title">
+<h2>Materi Subnetting</h2>
+<p>Teknik pembagian jaringan komputer</p>
+</div>
+
+</div>
+
+<div class="detail-content">
+
+<h3>📘 Pengertian Subnetting</h3>
+
+<p>
+Subnetting adalah teknik membagi jaringan besar menjadi beberapa subnet kecil agar jaringan lebih efisien dan mudah dikelola.
+</p>
+
+<p>
+Subnetting menggunakan subnet mask untuk menentukan bagian network dan host.
+</p>
+
+<p>
+Contoh subnet mask:
+<b>255.255.255.0</b>
+</p>
+
+<ul>
+<li><b>Network ID</b> → alamat awal jaringan</li>
+<li><b>Broadcast Address</b> → alamat penyiaran data</li>
+<li><b>Host Address</b> → alamat perangkat jaringan</li>
+</ul>
+
+<div class="highlight-box">
+
+<h4>💡 Contoh Subnetting</h4>
+
+<p>
+Subnet mask
+<b>255.255.255.0</b>
+memiliki kapasitas
+<b>254 host</b>.
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- GATEWAY -->
+
+<div id="gateway" class="detail-box">
+
+<div class="detail-header">
+
+<div class="detail-icon yellow">
+🔗
+</div>
+
+<div class="detail-title">
+<h2>Materi Gateway</h2>
+<p>Penghubung antar jaringan komputer</p>
+</div>
+
+</div>
+
+<div class="detail-content">
+
+<h3>📘 Pengertian Gateway</h3>
+
+<p>
+Gateway adalah jalur penghubung antara jaringan lokal dengan jaringan lain atau internet.
+</p>
+
+<p>
+Gateway biasanya berupa IP router seperti:
+<b>192.168.1.1</b>
+</p>
+
+<p>
+Semua data menuju internet akan melewati gateway terlebih dahulu.
+</p>
+
+<ul>
+<li><b>Default Gateway</b> → jalur utama jaringan</li>
+<li><b>Router Gateway</b> → penghubung antar jaringan</li>
+<li><b>Internet Gateway</b> → akses menuju internet</li>
+</ul>
+
+<div class="highlight-box">
+
+<h4>💡 Contoh Gateway</h4>
+
+<p>
+Jika IP komputer adalah
+<b>192.168.1.10</b>,
+maka gateway biasanya
+<b>192.168.1.1</b>.
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- TABLE -->
+
+<div class="section-title">
+
+<h2>📊 Class IPv4</h2>
+
+<p>
+Pembagian class IP Address berdasarkan ukuran jaringan.
+</p>
+
+</div>
+
+<div class="table-box">
+
+<table>
+
+<tr>
+<th>Class</th>
+<th>Range IP</th>
+<th>Default Subnet</th>
+<th>Jumlah Host</th>
+</tr>
+
+<tr>
+<td>A</td>
+<td>1.0.0.0 - 126.255.255.255</td>
+<td>255.0.0.0</td>
+<td>16 Juta</td>
+</tr>
+
+<tr>
+<td>B</td>
+<td>128.0.0.0 - 191.255.255.255</td>
+<td>255.255.0.0</td>
+<td>65 Ribu</td>
+</tr>
+
+<tr>
+<td>C</td>
+<td>192.0.0.0 - 223.255.255.255</td>
+<td>255.255.255.0</td>
+<td>254 Host</td>
+</tr>
+
+</table>
+
+</div>
+
+<!-- VIDEO -->
+
+<div class="section-title">
+
+<h2>🎥 Video Pembelajaran</h2>
+
+<p>
+Pelajari subnetting dan IP Address melalui video berikut.
+</p>
+
+</div>
+
+<div class="video-box">
+
+<iframe
+src="https://www.youtube.com/embed/bj-Yfakjllc"
+allowfullscreen>
+</iframe>
+
+</div>
+
+<!-- TIPS -->
+
+<section class="tips">
+
+<div class="tips-content">
+
+<h2>🚀 Tips Belajar Networking</h2>
+
+<p>
+Latihan konfigurasi jaringan dan subnetting secara rutin akan membantu memahami konsep networking lebih cepat.
+</p>
+
+<ul>
+<li>Pahami konsep dasar IP Address</li>
+<li>Latihan subnetting setiap hari</li>
+<li>Gunakan Cisco Packet Tracer</li>
+<li>Biasakan membaca format CIDR</li>
+<li>Coba membuat jaringan sederhana sendiri</li>
+</ul>
+
+</div>
+
+</section>
+
+<div class="finish-box">
+
+<h2>🎯 Selesaikan Materi</h2>
+
+<p>
+Klik tombol di bawah jika kamu sudah memahami materi IP Address & Subnetting.
+</p>
+
+<button class="finish-btn" onclick="finishIP()">
+✅ Selesaikan Materi
+</button>
+
+<a href="quiz-ip.html"
+class="quiz-btn">
+
+🧠 Kerjakan Quiz
+
+</a>
+
+</div>
+
+</main>
+
+</div>
+
+<script>
+
+  function completeMateri(){
+
+  localStorage.setItem(
+    "ip_done",
+    "true"
+  );
+
+  alert("Materi berhasil diselesaikan!");
+
+}
+
+const cards = document.querySelectorAll(".card");
+const details = document.querySelectorAll(".detail-box");
+
+cards.forEach(card=>{
+
+  card.addEventListener("click",()=>{
+
+    const target = card.getAttribute("data-target");
+
+    cards.forEach(c=>{
+      c.classList.remove("active");
+    });
+
+    details.forEach(detail=>{
+      detail.classList.remove("active");
+    });
+
+    card.classList.add("active");
+
+    document.getElementById(target).classList.add("active");
+
+  });
+
+});
+
+
+</script>
+
+<script>
+
+function finishIP(){
+
+  localStorage.setItem("ipDone", "true");
+
+  alert("🎉 Materi IP berhasil diselesaikan!");
+
+  window.location.href = "materi.html";
+
+}
+
+localStorage.setItem(
+  "ipDone",
+  "true"
+);
+
+</script>
+</body>
+</html>

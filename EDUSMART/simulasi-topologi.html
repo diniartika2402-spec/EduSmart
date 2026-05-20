@@ -1,0 +1,872 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Simulasi Jaringan - EduSmart</title>
+
+<link rel="stylesheet" href="css/style.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+
+.hero{
+  background:
+  linear-gradient(
+    135deg,
+    #2563eb,
+    #60a5fa
+  );
+
+  color:white;
+
+  padding:30px;
+
+  border-radius:25px;
+}
+
+.hero h1{
+  font-size:36px;
+}
+
+.hero p{
+  margin-top:10px;
+  opacity:.9;
+}
+
+.sim-layout{
+  display:grid;
+
+  grid-template-columns:
+  260px 1fr;
+
+  gap:24px;
+
+  margin-top:24px;
+}
+
+.toolbox{
+  background:white;
+
+  border-radius:24px;
+
+  padding:22px;
+
+  box-shadow:0 10px 30px rgba(0,0,0,.06);
+
+  height:fit-content;
+}
+
+.toolbox h2{
+  font-size:22px;
+  margin-bottom:16px;
+}
+
+.device{
+  padding:14px;
+
+  border-radius:16px;
+
+  background:#eff6ff;
+
+  margin-bottom:14px;
+
+  cursor:grab;
+
+  text-align:center;
+
+  font-weight:700;
+
+  transition:.3s;
+}
+
+.device:hover{
+  transform:translateY(-3px);
+}
+
+.canvas-area{
+  background:white;
+
+  border-radius:28px;
+
+  padding:20px;
+
+  box-shadow:0 10px 30px rgba(0,0,0,.06);
+}
+
+.mission-box{
+  background:#eff6ff;
+
+  padding:20px;
+
+  border-radius:20px;
+
+  margin-bottom:20px;
+}
+
+.mission-box h2{
+  color:#2563eb;
+}
+
+.mission-box p{
+  margin-top:10px;
+  line-height:1.8;
+}
+
+.canvas{
+  position:relative;
+
+  height:520px;
+
+  border-radius:24px;
+
+  border:3px dashed #93c5fd;
+
+  background:#f8fafc;
+
+  overflow:hidden;
+}
+
+.node{
+  position:absolute;
+
+  background:white;
+
+  padding:12px 16px;
+
+  border-radius:16px;
+
+  box-shadow:0 6px 20px rgba(0,0,0,.12);
+
+  font-weight:700;
+
+  cursor:pointer;
+
+  user-select:none;
+
+  transition:.2s;
+}
+
+.node:hover{
+  transform:scale(1.05);
+}
+
+.selected{
+  border:3px solid #2563eb;
+}
+
+svg{
+  position:absolute;
+
+  width:100%;
+  height:100%;
+
+  pointer-events:none;
+}
+
+line{
+  stroke:#2563eb;
+  stroke-width:3;
+}
+
+.action-buttons{
+  margin-top:20px;
+
+  display:flex;
+  gap:14px;
+  flex-wrap:wrap;
+}
+
+.btn{
+  border:none;
+
+  padding:14px 20px;
+
+  border-radius:16px;
+
+  font-weight:700;
+
+  cursor:pointer;
+
+  transition:.3s;
+}
+
+.check-btn{
+  background:#2563eb;
+  color:white;
+}
+
+.reset-btn{
+  background:#ef4444;
+  color:white;
+}
+
+.next-btn{
+  background:#16a34a;
+  color:white;
+}
+
+.btn:hover{
+  transform:translateY(-3px);
+}
+
+.result{
+  margin-top:18px;
+
+  font-size:18px;
+  font-weight:800;
+}
+
+@media(max-width:900px){
+
+  .sim-layout{
+    grid-template-columns:1fr;
+  }
+
+}
+
+/* ====================================
+RESPONSIVE UNIVERSAL
+==================================== */
+
+/* TABLET */
+
+@media(max-width:992px){
+
+.hero h1{
+font-size:36px;
+}
+
+.grid,
+.status-grid,
+.info-grid,
+.quiz-section,
+.cyber-layout{
+grid-template-columns:1fr !important;
+}
+
+}
+
+/* MOBILE */
+
+@media(max-width:768px){
+
+body{
+overflow-x:hidden;
+}
+
+/* APP */
+
+.app{
+flex-direction:column;
+}
+
+/* SIDEBAR */
+
+.sidebar{
+width:100%;
+height:auto;
+border-radius:0;
+}
+
+/* MAIN */
+
+.main{
+padding:18px;
+}
+
+/* TOPBAR */
+
+.topbar{
+flex-direction:column;
+align-items:flex-start;
+gap:15px;
+}
+
+/* HERO */
+
+.hero{
+padding:25px;
+border-radius:24px;
+}
+
+.hero h1{
+font-size:28px;
+line-height:1.4;
+}
+
+.hero p{
+font-size:14px;
+line-height:1.8;
+}
+
+/* GRID */
+
+.grid,
+.status-grid,
+.info-grid,
+.quiz-section,
+.cyber-layout,
+.stats-modern{
+grid-template-columns:1fr !important;
+}
+
+/* CARD */
+
+.card,
+.panel,
+.quiz-card,
+.status-card,
+.info-card,
+.modern-box{
+padding:22px;
+border-radius:24px;
+}
+
+/* BUTTON */
+
+.btn,
+.start-btn{
+width:100%;
+}
+
+/* QUIZ */
+
+.question{
+font-size:22px;
+}
+
+.final-score{
+font-size:58px;
+}
+
+/* NETWORK */
+
+.network-map{
+overflow:auto;
+}
+
+/* LOGIN */
+
+.login-card{
+width:100%;
+max-width:420px;
+padding:30px 24px;
+}
+
+}
+
+/* SMALL MOBILE */
+
+@media(max-width:480px){
+
+.hero h1{
+font-size:24px;
+}
+
+.question{
+font-size:20px;
+}
+
+.status-value{
+font-size:28px;
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="app">
+
+<!-- SIDEBAR -->
+
+<aside class="sidebar">
+
+<div>
+
+<div class="logo-box">
+
+<div class="logo">
+🌐
+</div>
+
+<div>
+<h2>EduSmart</h2>
+<p>Network Learning</p>
+</div>
+
+</div>
+
+<div class="nav-menu">
+
+<a href="dashboard.html" class="nav-link">
+🏠 Dashboard
+</a>
+
+<a href="materi.html" class="nav-link">
+📚 Materi
+</a>
+
+<a href="simulasi.html" class="nav-link active">
+🧩 Simulasi
+</a>
+
+<a href="kuis.html" class="nav-link">
+🎮 Kuis
+</a>
+
+</div>
+
+</div>
+
+</aside>
+
+<!-- MAIN -->
+
+<main class="main">
+
+<div class="hero">
+
+<h1>🧩 Simulasi Jaringan Interaktif</h1>
+
+<p>
+Drag perangkat → hubungkan → selesaikan misi jaringan komputer.
+</p>
+
+</div>
+
+<div class="sim-layout">
+
+<!-- TOOLBOX -->
+
+<div class="toolbox">
+
+<h2>📦 Perangkat</h2>
+
+<div
+class="device"
+draggable="true"
+ondragstart="drag(event)"
+id="pc">
+💻 PC
+</div>
+
+<div
+class="device"
+draggable="true"
+ondragstart="drag(event)"
+id="switch">
+📡 Switch
+</div>
+
+<div
+class="device"
+draggable="true"
+ondragstart="drag(event)"
+id="router">
+📶 Router
+</div>
+
+<div
+class="device"
+draggable="true"
+ondragstart="drag(event)"
+id="printer">
+🖨️ Printer
+</div>
+
+<div class="action-buttons">
+
+<button
+class="btn check-btn"
+onclick="checkMission()">
+✔ Cek
+</button>
+
+<button
+class="btn reset-btn"
+onclick="resetAll()">
+🔄 Reset
+</button>
+
+<button
+class="btn next-btn"
+onclick="nextMission()">
+➡ Mission Baru
+</button>
+
+</div>
+
+<div
+class="result"
+id="result">
+</div>
+
+</div>
+
+<!-- CANVAS -->
+
+<div class="canvas-area">
+
+<div class="mission-box">
+
+<h2 id="mission-title">
+🎯 Mission
+</h2>
+
+<p id="mission-desc">
+Loading...
+</p>
+
+</div>
+
+<div
+class="canvas"
+id="canvas"
+ondrop="drop(event)"
+ondragover="allowDrop(event)">
+
+<svg id="svg"></svg>
+
+</div>
+
+</div>
+
+</div>
+
+</main>
+
+</div>
+
+<script>
+
+let nodes = [];
+let edges = [];
+let selected = null;
+
+const missions = [
+
+{
+  title:"Topologi Star",
+  desc:"Buat topologi star menggunakan 1 Switch dan 3 PC.",
+
+  devices:{
+    switch:1,
+    pc:3
+  }
+},
+
+{
+  title:"Jaringan Router",
+  desc:"Hubungkan 1 Router, 1 Switch, dan 2 PC.",
+
+  devices:{
+    router:1,
+    switch:1,
+    pc:2
+  }
+},
+
+{
+  title:"Jaringan Kantor",
+  desc:"Buat jaringan kantor sederhana dengan 1 Router, 1 Switch, 1 Printer, dan 2 PC.",
+
+  devices:{
+    router:1,
+    switch:1,
+    printer:1,
+    pc:2
+  }
+},
+
+{
+  title:"Lab Komputer",
+  desc:"Hubungkan 1 Switch dengan 4 PC.",
+
+  devices:{
+    switch:1,
+    pc:4
+  }
+},
+
+{
+  title:"Internet Cafe",
+  desc:"Buat jaringan warnet dengan 1 Router dan 5 PC.",
+
+  devices:{
+    router:1,
+    pc:5
+  }
+}
+
+];
+
+let currentMission = null;
+
+function loadMission(){
+
+  const random =
+  Math.floor(
+    Math.random() * missions.length
+  );
+
+  currentMission =
+  missions[random];
+
+  document.getElementById(
+    "mission-title"
+  ).innerHTML =
+  "🎯 " + currentMission.title;
+
+  document.getElementById(
+    "mission-desc"
+  ).innerHTML =
+  currentMission.desc;
+
+}
+
+loadMission();
+
+/* =========================
+DRAG
+========================= */
+
+function allowDrop(ev){
+  ev.preventDefault();
+}
+
+function drag(ev){
+
+  ev.dataTransfer.setData(
+    "id",
+    ev.target.id
+  );
+
+}
+
+function drop(ev){
+
+  ev.preventDefault();
+
+  const id =
+  ev.dataTransfer.getData("id");
+
+  const original =
+  document.getElementById(id);
+
+  const node =
+  original.cloneNode(true);
+
+  node.classList.add("node");
+
+  node.removeAttribute("id");
+
+  const rect =
+  document.getElementById("canvas")
+  .getBoundingClientRect();
+
+  node.style.left =
+  (ev.clientX - rect.left - 40)
+  + "px";
+
+  node.style.top =
+  (ev.clientY - rect.top - 20)
+  + "px";
+
+  node.dataset.type = id;
+
+  node.onclick = () =>
+  selectNode(node);
+
+  document.getElementById(
+    "canvas"
+  ).appendChild(node);
+
+  nodes.push(node);
+
+}
+
+/* =========================
+CONNECT
+========================= */
+
+function selectNode(node){
+
+  if(!selected){
+
+    selected = node;
+
+    node.classList.add("selected");
+
+  } else {
+
+    connect(selected,node);
+
+    selected.classList.remove(
+      "selected"
+    );
+
+    selected = null;
+
+  }
+
+}
+
+function connect(a,b){
+
+  edges.push([a,b]);
+
+  const svg =
+  document.getElementById("svg");
+
+  const line =
+  document.createElementNS(
+    "http://www.w3.org/2000/svg",
+    "line"
+  );
+
+  line.setAttribute(
+    "x1",
+    a.offsetLeft + 50
+  );
+
+  line.setAttribute(
+    "y1",
+    a.offsetTop + 25
+  );
+
+  line.setAttribute(
+    "x2",
+    b.offsetLeft + 50
+  );
+
+  line.setAttribute(
+    "y2",
+    b.offsetTop + 25
+  );
+
+  svg.appendChild(line);
+
+}
+
+/* =========================
+CHECK MISSION
+========================= */
+
+function checkMission(){
+
+  const result =
+  document.getElementById(
+    "result"
+  );
+
+  const counts = {};
+
+  nodes.forEach(node => {
+
+    const type =
+    node.dataset.type;
+
+    counts[type] =
+    (counts[type] || 0) + 1;
+
+  });
+
+  let success = true;
+
+  for(let key in currentMission.devices){
+
+    const need =
+    currentMission.devices[key];
+
+    const have =
+    counts[key] || 0;
+
+    if(have < need){
+      success = false;
+    }
+
+  }
+
+  let connected =
+  new Set();
+
+  edges.forEach(e => {
+
+    connected.add(e[0]);
+    connected.add(e[1]);
+
+  });
+
+  const isolated =
+  nodes.filter(
+    n => !connected.has(n)
+  );
+
+  if(isolated.length > 0){
+    success = false;
+  }
+
+  if(success){
+
+    result.innerHTML =
+    "🎉 BERHASIL! Mission selesai.";
+
+    result.style.color =
+    "green";
+
+  } else {
+
+    result.innerHTML =
+    "❌ Jaringan belum sesuai mission.";
+
+    result.style.color =
+    "red";
+
+  }
+
+}
+
+/* =========================
+RESET
+========================= */
+
+function resetAll(){
+
+  document.getElementById(
+    "canvas"
+  ).innerHTML =
+  '<svg id="svg"></svg>';
+
+  nodes = [];
+  edges = [];
+  selected = null;
+
+  document.getElementById(
+    "result"
+  ).innerHTML = "";
+
+}
+
+/* =========================
+NEXT MISSION
+========================= */
+
+function nextMission(){
+
+  resetAll();
+
+  loadMission();
+
+}
+
+</script>
+
+</body>
+</html>

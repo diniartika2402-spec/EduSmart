@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Simulasi Perangkat Jaringan - EduSmart</title>
+
+<link rel="stylesheet" href="css/style.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+
+.sim-page{
+  display:flex;
+  flex-direction:column;
+  gap:25px;
+}
+
+/* HERO */
+
+.hero{
+  background:
+  linear-gradient(
+    135deg,
+    #0f172a,
+    #2563eb
+  );
+
+  color:white;
+
+  padding:35px;
+
+  border-radius:30px;
+}
+
+.hero h1{
+  font-size:38px;
+}
+
+.hero p{
+  margin-top:12px;
+  line-height:1.8;
+  opacity:.9;
+}
+
+/* BOX */
+
+.box{
+  background:white;
+  border-radius:28px;
+  padding:28px;
+  box-shadow:0 10px 30px rgba(0,0,0,.06);
+}
+
+/* QUESTION */
+
+.question-box h2{
+  font-size:28px;
+}
+
+.question-box p{
+  margin-top:10px;
+  color:#64748b;
+  line-height:1.8;
+}
+
+.target{
+  margin-top:20px;
+
+  background:#eff6ff;
+  color:#1d4ed8;
+
+  padding:18px;
+  border-radius:18px;
+
+  font-weight:700;
+}
+
+/* DEVICE */
+
+.device-grid{
+  margin-top:25px;
+
+  display:grid;
+  grid-template-columns:
+  repeat(auto-fit,minmax(160px,1fr));
+
+  gap:18px;
+}
+
+.device{
+  background:#f8fafc;
+
+  border:3px solid transparent;
+
+  border-radius:22px;
+
+  padding:24px;
+
+  text-align:center;
+
+  cursor:pointer;
+
+  transition:.3s;
+}
+
+.device:hover{
+  transform:translateY(-5px);
+}
+
+.device.selected{
+  border-color:#2563eb;
+  background:#dbeafe;
+}
+
+.device .emoji{
+  font-size:42px;
+}
+
+.device h3{
+  margin-top:14px;
+  font-size:18px;
+}
+
+.device p{
+  margin-top:8px;
+  color:#64748b;
+  font-size:14px;
+  line-height:1.6;
+}
+
+/* BUTTON */
+
+.btn-area{
+  margin-top:28px;
+
+  display:flex;
+  gap:15px;
+  flex-wrap:wrap;
+}
+
+.btn{
+  border:none;
+
+  padding:15px 22px;
+
+  border-radius:16px;
+
+  font-size:15px;
+  font-weight:700;
+
+  cursor:pointer;
+
+  transition:.3s;
+}
+
+.primary{
+  background:#2563eb;
+  color:white;
+}
+
+.secondary{
+  background:#e2e8f0;
+}
+
+.btn:hover{
+  transform:translateY(-3px);
+}
+
+/* RESULT */
+
+.result-box{
+  margin-top:25px;
+
+  padding:22px;
+
+  border-radius:20px;
+
+  display:none;
+}
+
+.result-box.success{
+  background:#dcfce7;
+  color:#166534;
+}
+
+.result-box.error{
+  background:#fee2e2;
+  color:#991b1b;
+}
+
+.result-box h3{
+  font-size:24px;
+}
+
+.result-box p{
+  margin-top:10px;
+  line-height:1.8;
+}
+
+/* SCORE */
+
+.score-box{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:20px;
+}
+
+.score{
+  font-size:42px;
+  font-weight:800;
+  color:#2563eb;
+}
+
+/* FINISH */
+
+.finish-box{
+  display:none;
+
+  background:
+  linear-gradient(
+    135deg,
+    #2563eb,
+    #60a5fa
+  );
+
+  color:white;
+
+  padding:35px;
+
+  border-radius:30px;
+
+  text-align:center;
+}
+
+.finish-box h2{
+  font-size:36px;
+}
+
+.finish-box p{
+  margin-top:15px;
+  line-height:1.8;
+  opacity:.95;
+}
+
+@media(max-width:768px){
+
+  .hero h1{
+    font-size:30px;
+  }
+
+}
+
+/* ====================================
+RESPONSIVE UNIVERSAL
+==================================== */
+
+/* TABLET */
+
+@media(max-width:992px){
+
+.hero h1{
+font-size:36px;
+}
+
+.grid,
+.status-grid,
+.info-grid,
+.quiz-section,
+.cyber-layout{
+grid-template-columns:1fr !important;
+}
+
+}
+
+/* MOBILE */
+
+@media(max-width:768px){
+
+body{
+overflow-x:hidden;
+}
+
+/* APP */
+
+.app{
+flex-direction:column;
+}
+
+/* SIDEBAR */
+
+.sidebar{
+width:100%;
+height:auto;
+border-radius:0;
+}
+
+/* MAIN */
+
+.main{
+padding:18px;
+}
+
+/* TOPBAR */
+
+.topbar{
+flex-direction:column;
+align-items:flex-start;
+gap:15px;
+}
+
+/* HERO */
+
+.hero{
+padding:25px;
+border-radius:24px;
+}
+
+.hero h1{
+font-size:28px;
+line-height:1.4;
+}
+
+.hero p{
+font-size:14px;
+line-height:1.8;
+}
+
+/* GRID */
+
+.grid,
+.status-grid,
+.info-grid,
+.quiz-section,
+.cyber-layout,
+.stats-modern{
+grid-template-columns:1fr !important;
+}
+
+/* CARD */
+
+.card,
+.panel,
+.quiz-card,
+.status-card,
+.info-card,
+.modern-box{
+padding:22px;
+border-radius:24px;
+}
+
+/* BUTTON */
+
+.btn,
+.start-btn{
+width:100%;
+}
+
+/* QUIZ */
+
+.question{
+font-size:22px;
+}
+
+.final-score{
+font-size:58px;
+}
+
+/* NETWORK */
+
+.network-map{
+overflow:auto;
+}
+
+/* LOGIN */
+
+.login-card{
+width:100%;
+max-width:420px;
+padding:30px 24px;
+}
+
+}
+
+/* SMALL MOBILE */
+
+@media(max-width:480px){
+
+.hero h1{
+font-size:24px;
+}
+
+.question{
+font-size:20px;
+}
+
+.status-value{
+font-size:28px;
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+<!-- SIDEBAR -->
+
+<aside class="sidebar">
+
+<div>
+
+<div class="logo-box">
+
+<div class="logo">
+🌐
+</div>
+
+<div>
+<h2>EduSmart</h2>
+<p>Network Learning</p>
+</div>
+
+</div>
+
+<div class="nav-menu">
+
+<a href="dashboard.html" class="nav-link">
+🏠 Dashboard
+</a>
+
+<a href="materi.html" class="nav-link">
+📚 Materi
+</a>
+
+<a href="simulasi.html" class="nav-link active">
+🧩 Simulasi
+</a>
+
+<a href="kuis.html" class="nav-link">
+🎮 Kuis
+</a>
+
+</div>
+
+</div>
+
+</aside>
+
+<!-- MAIN -->
+
+<main class="main sim-page">
+
+<!-- HERO -->
+
+<div class="hero">
+
+<h1>📡 Simulasi Perangkat Jaringan</h1>
+
+<p>
+Pilih perangkat jaringan yang paling tepat sesuai kebutuhan jaringan komputer.
+Setiap soal memiliki kebutuhan jaringan yang berbeda.
+</p>
+
+</div>
+
+<!-- SCORE -->
+
+<div class="box score-box">
+
+<div>
+
+<h2>🏆 Progress Simulasi</h2>
+
+<p>Selesaikan seluruh tantangan perangkat jaringan.</p>
+
+</div>
+
+<div class="score">
+<span id="score">0</span>/5
+</div>
+
+</div>
+
+<!-- QUESTION -->
+
+<div class="box question-box">
+
+<h2 id="questionTitle">
+Loading...
+</h2>
+
+<p id="questionDesc">
+Loading...
+</p>
+
+<div class="target" id="targetBox">
+Loading...
+</div>
+
+<!-- DEVICE -->
+
+<div class="device-grid" id="deviceGrid">
+
+</div>
+
+<!-- BUTTON -->
+
+<div class="btn-area">
+
+<button class="btn primary"
+onclick="checkAnswer()">
+✔ Cek Jawaban
+</button>
+
+<button class="btn secondary"
+onclick="nextQuestion()">
+➡ Soal Berikutnya
+</button>
+
+</div>
+
+<!-- RESULT -->
+
+<div class="result-box" id="resultBox">
+
+<h3 id="resultTitle">
+Hasil
+</h3>
+
+<p id="resultText">
+...
+</p>
+
+</div>
+
+</div>
+
+<!-- FINISH -->
+
+<div class="finish-box" id="finishBox">
+
+<h2>🎉 Simulasi Selesai!</h2>
+
+<p>
+Kamu berhasil menyelesaikan simulasi perangkat jaringan.
+Progress belajar berhasil diperbarui.
+</p>
+
+<button class="btn primary"
+onclick="window.location.href='simulasi.html'">
+⬅ Kembali ke Simulasi
+</button>
+
+</div>
+
+</main>
+
+</div>
+
+<script>
+
+const questions = [
+
+{
+  title: "Soal 1",
+  desc: "Sebuah kantor ingin menghubungkan banyak komputer dalam satu jaringan lokal.",
+  target: "Perangkat apa yang paling tepat digunakan?",
+  options: [
+    {
+      name:"Switch",
+      emoji:"📡",
+      desc:"Menghubungkan banyak perangkat dalam LAN",
+      correct:true
+    },
+    {
+      name:"Printer",
+      emoji:"🖨️",
+      desc:"Mencetak dokumen",
+      correct:false
+    },
+    {
+      name:"Firewall",
+      emoji:"🔥",
+      desc:"Mengamankan jaringan",
+      correct:false
+    },
+    {
+      name:"Access Point",
+      emoji:"📶",
+      desc:"Menyediakan WiFi",
+      correct:false
+    }
+  ]
+},
+
+{
+  title: "Soal 2",
+  desc: "Rumah ingin memiliki koneksi internet nirkabel agar HP dan laptop bisa terhubung tanpa kabel.",
+  target: "Pilih perangkat yang sesuai.",
+  options: [
+    {
+      name:"Access Point",
+      emoji:"📶",
+      desc:"Menyediakan jaringan wireless",
+      correct:true
+    },
+    {
+      name:"Hub",
+      emoji:"🔀",
+      desc:"Menghubungkan perangkat kabel",
+      correct:false
+    },
+    {
+      name:"Repeater",
+      emoji:"📍",
+      desc:"Memperkuat sinyal",
+      correct:false
+    },
+    {
+      name:"Printer",
+      emoji:"🖨️",
+      desc:"Mencetak dokumen",
+      correct:false
+    }
+  ]
+},
+
+{
+  title: "Soal 3",
+  desc: "Sekolah ingin menghubungkan jaringan ke internet dari ISP.",
+  target: "Perangkat apa yang dibutuhkan?",
+  options: [
+    {
+      name:"Router",
+      emoji:"🌍",
+      desc:"Menghubungkan jaringan ke internet",
+      correct:true
+    },
+    {
+      name:"Switch",
+      emoji:"📡",
+      desc:"Menghubungkan LAN",
+      correct:false
+    },
+    {
+      name:"Hub",
+      emoji:"🔀",
+      desc:"Membagi koneksi",
+      correct:false
+    },
+    {
+      name:"Printer",
+      emoji:"🖨️",
+      desc:"Mencetak data",
+      correct:false
+    }
+  ]
+},
+
+{
+  title: "Soal 4",
+  desc: "Sinyal WiFi di lantai dua sangat lemah dan perlu diperkuat.",
+  target: "Perangkat mana yang paling cocok?",
+  options: [
+    {
+      name:"Repeater",
+      emoji:"📍",
+      desc:"Memperkuat sinyal jaringan",
+      correct:true
+    },
+    {
+      name:"Router",
+      emoji:"🌍",
+      desc:"Mengatur jalur jaringan",
+      correct:false
+    },
+    {
+      name:"Server",
+      emoji:"🖥️",
+      desc:"Menyimpan data",
+      correct:false
+    },
+    {
+      name:"Switch",
+      emoji:"📡",
+      desc:"Menghubungkan perangkat",
+      correct:false
+    }
+  ]
+},
+
+{
+  title: "Soal 5",
+  desc: "Perusahaan ingin melindungi jaringan dari akses berbahaya dari luar.",
+  target: "Pilih perangkat keamanan jaringan.",
+  options: [
+    {
+      name:"Firewall",
+      emoji:"🔥",
+      desc:"Melindungi jaringan dari ancaman",
+      correct:true
+    },
+    {
+      name:"Printer",
+      emoji:"🖨️",
+      desc:"Mencetak file",
+      correct:false
+    },
+    {
+      name:"Hub",
+      emoji:"🔀",
+      desc:"Menghubungkan perangkat",
+      correct:false
+    },
+    {
+      name:"Access Point",
+      emoji:"📶",
+      desc:"Menyediakan WiFi",
+      correct:false
+    }
+  ]
+}
+
+];
+
+let current = 0;
+let score = 0;
+let selected = null;
+
+/* LOAD */
+
+function loadQuestion(){
+
+  if(current >= questions.length){
+
+    document.querySelector(".question-box")
+    .style.display = "none";
+
+    document.getElementById("finishBox")
+    .style.display = "block";
+
+    localStorage.setItem(
+      "simulasiPerangkatDone",
+      "true"
+    );
+
+    return;
+  }
+
+  const q = questions[current];
+
+  document.getElementById("questionTitle")
+  .innerHTML = q.title;
+
+  document.getElementById("questionDesc")
+  .innerHTML = q.desc;
+
+  document.getElementById("targetBox")
+  .innerHTML = "🎯 " + q.target;
+
+  const grid =
+  document.getElementById("deviceGrid");
+
+  grid.innerHTML = "";
+
+  selected = null;
+
+  q.options.forEach(option => {
+
+    const div =
+    document.createElement("div");
+
+    div.className = "device";
+
+    div.innerHTML = `
+      <div class="emoji">${option.emoji}</div>
+      <h3>${option.name}</h3>
+      <p>${option.desc}</p>
+    `;
+
+    div.onclick = () => {
+
+      document
+      .querySelectorAll(".device")
+      .forEach(d => d.classList.remove("selected"));
+
+      div.classList.add("selected");
+
+      selected = option;
+
+    };
+
+    grid.appendChild(div);
+
+  });
+
+  document.getElementById("resultBox")
+  .style.display = "none";
+}
+
+/* CHECK */
+
+function checkAnswer(){
+
+  const result =
+  document.getElementById("resultBox");
+
+  const title =
+  document.getElementById("resultTitle");
+
+  const text =
+  document.getElementById("resultText");
+
+  if(!selected){
+
+    result.style.display = "block";
+    result.className = "result-box error";
+
+    title.innerHTML = "⚠ Belum Memilih";
+    text.innerHTML =
+    "Pilih salah satu perangkat terlebih dahulu.";
+
+    return;
+  }
+
+  if(selected.correct){
+
+    result.style.display = "block";
+    result.className = "result-box success";
+
+    title.innerHTML = "✔ Jawaban Benar";
+
+    text.innerHTML =
+    `${selected.name} adalah perangkat yang tepat untuk kebutuhan tersebut.`;
+
+    score++;
+
+    document.getElementById("score")
+    .innerHTML = score;
+
+  } else {
+
+    result.style.display = "block";
+    result.className = "result-box error";
+
+    title.innerHTML = "✖ Jawaban Salah";
+
+    text.innerHTML =
+    `${selected.name} bukan perangkat yang paling tepat untuk kasus ini.`;
+
+  }
+
+}
+
+/* NEXT */
+
+function nextQuestion(){
+
+  current++;
+
+  loadQuestion();
+
+}
+
+loadQuestion();
+
+</script>
+
+</body>
+</html>

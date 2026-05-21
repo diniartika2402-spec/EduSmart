@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-
 <title>IP Address & Subnetting - EduSmart</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -637,51 +636,7 @@ tr:nth-child(even){
   line-height:2.1;
 }
 
-/* RESPONSIVE */
-
-@media(max-width:1100px){
-
-  .learning-layout{
-    grid-template-columns:1fr;
-  }
-
-  .card-list{
-    position:relative;
-    top:0;
-  }
-
-}
-
-@media(max-width:900px){
-
-  .sidebar{
-    display:none;
-  }
-
-  .main{
-    margin-left:0;
-    width:100%;
-    padding:20px;
-  }
-
-  .hero{
-    padding:38px;
-  }
-
-  .hero h1{
-    font-size:38px;
-  }
-
-  .detail-header{
-    flex-direction:column;
-    align-items:flex-start;
-  }
-
-  .video-box iframe{
-    height:250px;
-  }
-
-}
+/* FINISH BOX */
 
 .finish-box{
   background:white;
@@ -752,138 +707,51 @@ tr:nth-child(even){
   transform:translateY(-4px);
 }
 
-/* ====================================
-RESPONSIVE UNIVERSAL
-==================================== */
+/* RESPONSIVE */
 
-/* TABLET */
+@media(max-width:1100px){
 
-@media(max-width:992px){
+  .learning-layout{
+    grid-template-columns:1fr;
+  }
 
-.hero h1{
-font-size:36px;
-}
-
-.grid,
-.status-grid,
-.info-grid,
-.quiz-section,
-.cyber-layout{
-grid-template-columns:1fr !important;
-}
+  .card-list{
+    position:relative;
+    top:0;
+  }
 
 }
 
-/* MOBILE */
+@media(max-width:900px){
 
-@media(max-width:768px){
+  .sidebar{
+    display:none;
+  }
 
-body{
-overflow-x:hidden;
-}
+  .main{
+    margin-left:0;
+    width:100%;
+    padding:20px;
+  }
 
-/* APP */
+  .hero{
+    padding:38px;
+  }
 
-.app{
-flex-direction:column;
-}
+  .hero h1{
+    font-size:38px;
+  }
 
-/* SIDEBAR */
+  .detail-header{
+    flex-direction:column;
+    align-items:flex-start;
+  }
 
-.sidebar{
-width:100%;
-height:auto;
-border-radius:0;
-}
-
-/* MAIN */
-
-.main{
-padding:18px;
-}
-
-/* TOPBAR */
-
-.topbar{
-flex-direction:column;
-align-items:flex-start;
-gap:15px;
-}
-
-/* HERO */
-
-.hero{
-padding:25px;
-border-radius:24px;
-}
-
-.hero h1{
-font-size:28px;
-line-height:1.4;
-}
-
-.hero p{
-font-size:14px;
-line-height:1.8;
-}
-
-/* GRID */
-
-.grid,
-.status-grid,
-.info-grid,
-.quiz-section,
-.cyber-layout,
-.stats-modern{
-grid-template-columns:1fr !important;
-}
-
-/* CARD */
-
-.card,
-.panel,
-.quiz-card,
-.status-card,
-.info-card,
-.modern-box{
-padding:22px;
-border-radius:24px;
-}
-
-/* BUTTON */
-
-.btn,
-.start-btn{
-width:100%;
-}
-
-/* QUIZ */
-
-.question{
-font-size:22px;
-}
-
-.final-score{
-font-size:58px;
-}
-
-/* NETWORK */
-
-.network-map{
-overflow:auto;
-}
-
-/* LOGIN */
-
-.login-card{
-width:100%;
-max-width:420px;
-padding:30px 24px;
-}
+  .video-box iframe{
+    height:250px;
+  }
 
 }
-
-/* SMALL MOBILE */
 
 @media(max-width:480px){
 
@@ -891,15 +759,24 @@ padding:30px 24px;
 font-size:24px;
 }
 
-.question{
-font-size:20px;
+.section-title h2{
+font-size:24px;
 }
 
-.status-value{
-font-size:28px;
+.detail-title h2{
+font-size:26px;
+}
+
+.video-box iframe{
+height:220px;
+}
+
+.finish-box h2{
+font-size:24px;
 }
 
 }
+
 </style>
 </head>
 
@@ -1108,24 +985,6 @@ IPv4 terdiri dari 32-bit yang dibagi menjadi empat oktet dengan format seperti:
 IP Address memungkinkan perangkat saling berkomunikasi dan bertukar data melalui jaringan.
 </p>
 
-<ul>
-<li><b>Network ID</b> → menunjukkan alamat jaringan</li>
-<li><b>Host ID</b> → menunjukkan perangkat dalam jaringan</li>
-<li><b>Public IP</b> → digunakan untuk internet global</li>
-<li><b>Private IP</b> → digunakan dalam jaringan lokal</li>
-</ul>
-
-<div class="highlight-box">
-
-<h4>💡 Contoh IPv4</h4>
-
-<p>
-Saat laptop terhubung ke WiFi sekolah, perangkat akan memperoleh IP seperti
-<b>192.168.10.5</b>.
-</p>
-
-</div>
-
 </div>
 
 </div>
@@ -1155,34 +1014,6 @@ Saat laptop terhubung ke WiFi sekolah, perangkat akan memperoleh IP seperti
 Subnetting adalah teknik membagi jaringan besar menjadi beberapa subnet kecil agar jaringan lebih efisien dan mudah dikelola.
 </p>
 
-<p>
-Subnetting menggunakan subnet mask untuk menentukan bagian network dan host.
-</p>
-
-<p>
-Contoh subnet mask:
-<b>255.255.255.0</b>
-</p>
-
-<ul>
-<li><b>Network ID</b> → alamat awal jaringan</li>
-<li><b>Broadcast Address</b> → alamat penyiaran data</li>
-<li><b>Host Address</b> → alamat perangkat jaringan</li>
-</ul>
-
-<div class="highlight-box">
-
-<h4>💡 Contoh Subnetting</h4>
-
-<p>
-Subnet mask
-<b>255.255.255.0</b>
-memiliki kapasitas
-<b>254 host</b>.
-</p>
-
-</div>
-
 </div>
 
 </div>
@@ -1211,34 +1042,6 @@ memiliki kapasitas
 <p>
 Gateway adalah jalur penghubung antara jaringan lokal dengan jaringan lain atau internet.
 </p>
-
-<p>
-Gateway biasanya berupa IP router seperti:
-<b>192.168.1.1</b>
-</p>
-
-<p>
-Semua data menuju internet akan melewati gateway terlebih dahulu.
-</p>
-
-<ul>
-<li><b>Default Gateway</b> → jalur utama jaringan</li>
-<li><b>Router Gateway</b> → penghubung antar jaringan</li>
-<li><b>Internet Gateway</b> → akses menuju internet</li>
-</ul>
-
-<div class="highlight-box">
-
-<h4>💡 Contoh Gateway</h4>
-
-<p>
-Jika IP komputer adalah
-<b>192.168.1.10</b>,
-maka gateway biasanya
-<b>192.168.1.1</b>.
-</p>
-
-</div>
 
 </div>
 
@@ -1311,7 +1114,9 @@ Pelajari subnetting dan IP Address melalui video berikut.
 <div class="video-box">
 
 <iframe
-src="https://www.youtube.com/embed/bj-Yfakjllc"
+src="https://www.youtube.com/embed/JkgH2TtOdPQ"
+title="Video IP Address & Subnetting"
+allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
 allowfullscreen>
 </iframe>
 
@@ -1341,6 +1146,8 @@ Latihan konfigurasi jaringan dan subnetting secara rutin akan membantu memahami 
 
 </section>
 
+<!-- FINISH BOX -->
+
 <div class="finish-box">
 
 <h2>🎯 Selesaikan Materi</h2>
@@ -1353,11 +1160,10 @@ Klik tombol di bawah jika kamu sudah memahami materi IP Address & Subnetting.
 ✅ Selesaikan Materi
 </button>
 
-<a href="quiz-ip.html"
-class="quiz-btn">
+<br>
 
+<a href="quiz-ip.html" class="quiz-btn">
 🧠 Kerjakan Quiz
-
 </a>
 
 </div>
@@ -1367,17 +1173,6 @@ class="quiz-btn">
 </div>
 
 <script>
-
-  function completeMateri(){
-
-  localStorage.setItem(
-    "ip_done",
-    "true"
-  );
-
-  alert("Materi berhasil diselesaikan!");
-
-}
 
 const cards = document.querySelectorAll(".card");
 const details = document.querySelectorAll(".detail-box");
@@ -1404,11 +1199,6 @@ cards.forEach(card=>{
 
 });
 
-
-</script>
-
-<script>
-
 function finishIP(){
 
   localStorage.setItem("ipDone", "true");
@@ -1419,11 +1209,7 @@ function finishIP(){
 
 }
 
-localStorage.setItem(
-  "ipDone",
-  "true"
-);
-
 </script>
+
 </body>
 </html>

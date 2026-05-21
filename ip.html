@@ -774,302 +774,129 @@ grid-template-columns:1fr !important;
 
 }
 
-/* ====================================
-RESPONSIVE MOBILE UPGRADE
-==================================== */
+/* MOBILE */
 
-@media(max-width:900px){
+@media(max-width:768px){
 
 body{
-overflow:hidden;
+overflow-x:hidden;
+}
+
+/* APP */
+
+.app{
+flex-direction:column;
 }
 
 /* SIDEBAR */
 
 .sidebar{
-display:none;
+width:100%;
+height:auto;
+border-radius:0;
 }
 
 /* MAIN */
 
 .main{
-margin-left:0;
-width:100%;
-padding:14px;
-height:100vh;
-overflow:hidden;
+padding:18px;
+}
+
+/* TOPBAR */
+
+.topbar{
+flex-direction:column;
+align-items:flex-start;
+gap:15px;
 }
 
 /* HERO */
 
 .hero{
-padding:24px;
+padding:25px;
 border-radius:24px;
 }
 
 .hero h1{
 font-size:28px;
-line-height:1.3;
+line-height:1.4;
 }
 
 .hero p{
-font-size:13px;
-line-height:1.7;
+font-size:14px;
+line-height:1.8;
 }
 
-.hero-buttons{
-flex-direction:column;
-}
+/* GRID */
 
-.btn{
-width:100%;
-text-align:center;
-}
-
-/* LEARNING LAYOUT */
-
-.learning-layout{
-display:grid;
-grid-template-columns:160px 1fr;
-gap:14px;
-height:70vh;
-align-items:start;
-}
-
-/* LEFT CARD */
-
-.card-list{
-position:relative;
-top:0;
-
-height:100%;
-overflow-y:auto;
-
-padding-right:4px;
-
-display:flex;
-flex-direction:column;
-gap:12px;
+.grid,
+.status-grid,
+.info-grid,
+.quiz-section,
+.cyber-layout,
+.stats-modern{
+grid-template-columns:1fr !important;
 }
 
 /* CARD */
 
-.card{
-padding:14px;
-border-radius:18px;
-min-height:auto;
-}
-
-.card h3{
-font-size:16px;
-margin-top:10px;
-}
-
-.card p{
-font-size:11px;
-line-height:1.5;
-margin-top:8px;
-}
-
-.card-tag{
-margin-top:10px;
-font-size:10px;
-padding:6px 10px;
-}
-
-.icon{
-width:50px;
-height:50px;
-font-size:22px;
-border-radius:16px;
-}
-
-/* RIGHT DETAIL */
-
-.detail-wrapper{
-height:100%;
-overflow-y:auto;
-padding-right:4px;
-}
-
-.detail-box{
-padding:20px;
-border-radius:22px;
-min-height:100%;
-}
-
-/* DETAIL HEADER */
-
-.detail-header{
-flex-direction:column;
-align-items:flex-start;
-gap:14px;
-padding-bottom:18px;
-}
-
-.detail-icon{
-width:60px;
-height:60px;
-font-size:26px;
-border-radius:18px;
-}
-
-.detail-title h2{
-font-size:24px;
-line-height:1.3;
-}
-
-.detail-title p{
-font-size:12px;
-}
-
-/* DETAIL CONTENT */
-
-.detail-content{
-margin-top:20px;
-}
-
-.detail-content h3{
-font-size:20px;
-margin-bottom:12px;
-}
-
-.detail-content p{
-font-size:13px;
-line-height:1.8;
-margin-bottom:14px;
-}
-
-.detail-content ul{
-padding-left:18px;
-line-height:1.8;
-font-size:13px;
-}
-
-/* HIGHLIGHT */
-
-.highlight-box{
-padding:18px;
-border-radius:18px;
-margin-top:18px;
-}
-
-.highlight-box h4{
-font-size:16px;
-}
-
-/* TABLE */
-
-.table-box{
-padding:16px;
-border-radius:20px;
-overflow:auto;
-}
-
-table{
-min-width:600px;
-}
-
-th,td{
-padding:12px;
-font-size:12px;
-}
-
-/* VIDEO */
-
-.video-box{
-padding:14px;
-border-radius:20px;
-}
-
-.video-box iframe{
-height:220px;
-}
-
-/* TIPS */
-
-.tips{
-padding:24px;
-border-radius:24px;
-}
-
-.tips h2{
-font-size:24px;
-}
-
-.tips p,
-.tips li{
-font-size:13px;
-line-height:1.8;
-}
-
-/* FINISH */
-
-.finish-box{
+.card,
+.panel,
+.quiz-card,
+.status-card,
+.info-card,
+.modern-box{
 padding:22px;
 border-radius:24px;
 }
 
-.finish-box h2{
+/* BUTTON */
+
+.btn,
+.start-btn{
+width:100%;
+}
+
+/* QUIZ */
+
+.question{
+font-size:22px;
+}
+
+.final-score{
+font-size:58px;
+}
+
+/* NETWORK */
+
+.network-map{
+overflow:auto;
+}
+
+/* LOGIN */
+
+.login-card{
+width:100%;
+max-width:420px;
+padding:30px 24px;
+}
+
+}
+
+/* SMALL MOBILE */
+
+@media(max-width:480px){
+
+.hero h1{
 font-size:24px;
 }
 
-.finish-box p{
-font-size:13px;
-}
-
-.finish-btn,
-.quiz-btn{
-width:100%;
-padding:14px 18px;
-font-size:14px;
-border-radius:16px;
-}
-
-}
-
-/* EXTRA SMALL */
-
-@media(max-width:600px){
-
-.learning-layout{
-grid-template-columns:140px 1fr;
-gap:10px;
-height:68vh;
-}
-
-.card{
-padding:12px;
-}
-
-.card h3{
-font-size:14px;
-}
-
-.card p{
-font-size:10px;
-}
-
-.icon{
-width:44px;
-height:44px;
-font-size:18px;
-}
-
-.detail-box{
-padding:16px;
-}
-
-.detail-title h2{
+.question{
 font-size:20px;
 }
 
-.detail-content h3{
-font-size:18px;
-}
-
-.video-box iframe{
-height:180px;
+.status-value{
+font-size:28px;
 }
 
 }
